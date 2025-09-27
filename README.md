@@ -1,7 +1,3 @@
-# This repository is for archival purposes!
-The newer, up to date and actively maintained repository is located over at:
-https://github.com/TorqueGameEngines/Torque3D
-
 # Torque 3D
 MIT Licensed Open Source version of [Torque 3D](http://torque3d.org) from [GarageGames](http://www.garagegames.com)
 

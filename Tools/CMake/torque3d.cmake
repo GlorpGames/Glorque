@@ -27,20 +27,21 @@ if(UNIX)
         set(CXX_FLAG32 "")
     endif()
     #set(CXX_FLAG32 "-m32") #uncomment for build x32 on OSx64
-
     if (CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAG32} -Wundef -msse -pipe -Wfatal-errors -Wno-return-type-c-linkage -Wno-unused-local-typedef ${TORQUE_ADDITIONAL_LINKER_FLAGS}")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CXX_FLAG32} -Wundef -msse -pipe -Wfatal-errors -Wno-return-type-c-linkage -Wno-unused-local-typedef ${TORQUE_ADDITIONAL_LINKER_FLAGS}")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAG32} -Wundef -pipe -Wfatal-errors -Wno-return-type-c-linkage -Wno-unused-local-typedef ${TORQUE_ADDITIONAL_LINKER_FLAGS}")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CXX_FLAG32} -Wundef -pipe -Wfatal-errors -Wno-return-type-c-linkage -Wno-unused-local-typedef ${TORQUE_ADDITIONAL_LINKER_FLAGS}")
     else()
     # default compiler flags
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAG32} -Wundef -msse -pipe -Wfatal-errors ${TORQUE_ADDITIONAL_LINKER_FLAGS} -Wl,-rpath,'$$ORIGIN'")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CXX_FLAG32} -Wundef -msse -pipe -Wfatal-errors ${TORQUE_ADDITIONAL_LINKER_FLAGS} -Wl,-rpath,'$$ORIGIN'")
-
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${CXX_FLAG32} -Wundef -pipe -Wfatal-errors ${TORQUE_ADDITIONAL_LINKER_FLAGS} -Wl,-rpath,'$$ORIGIN'")
+        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${CXX_FLAG32} -Wundef -pipe -Wfatal-errors ${TORQUE_ADDITIONAL_LINKER_FLAGS} -Wl,-rpath,'$$ORIGIN'")
    endif()    
-
 	# for asm files
-	SET (CMAKE_ASM_NASM_OBJECT_FORMAT "elf")
-	ENABLE_LANGUAGE (ASM_NASM)
+    if(NOT TORQUE_CPU_ARM64)
+        SET (CMAKE_ASM_NASM_OBJECT_FORMAT "elf")
+        ENABLE_LANGUAGE (ASM_NASM)
+        list(APPEND CMAKE_CXX_FLAGS "-msse")
+        list(APPEND CMAKE_C_FLAGS "-msse")
+    endif()
 
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif()
@@ -60,7 +61,7 @@ option(TORQUE_BASIC_LIGHTING "Basic Lighting" ON)
 mark_as_advanced(TORQUE_BASIC_LIGHTING)
 option(TORQUE_SFX_DirectX "DirectX Sound" OFF)
 mark_as_advanced(TORQUE_SFX_DirectX)
-option(TORQUE_SFX_OPENAL "OpenAL Sound" ON)
+option(TORQUE_SFX_OPENAL "OpenAL Sound" OFF)
 
 if(TORQUE_SFX_OPENAL)
     #disable a few things that are not required

@@ -136,7 +136,7 @@ void tc_spinloop()
    #elif defined( _WIN64 )
       YieldProcessor( );
    #else
-		asm("pause");
+		asm("nop");
    #endif
 }
 

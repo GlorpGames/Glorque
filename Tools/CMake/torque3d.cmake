@@ -709,6 +709,7 @@ endif()
 
 if(TORQUE_SDL)
     addDef(TORQUE_SDL)
+    # find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3) # not yet!
     addInclude(${libDir}/sdl/include)
     if(APPLE)
        addLib(SDL2main)

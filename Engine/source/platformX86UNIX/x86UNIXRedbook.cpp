@@ -32,7 +32,7 @@
 #include <string.h>
 #endif
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 
 class SDL_CD; // TODO SDL remove
 

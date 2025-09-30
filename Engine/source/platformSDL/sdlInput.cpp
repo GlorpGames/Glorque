@@ -28,7 +28,7 @@
 #include "sdlInput.h"
 #include "platform/platformInput.h"
 #include "sdlInputManager.h"
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 // Static class variables:
 InputManager*  Input::smManager = NULL;

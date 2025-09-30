@@ -27,7 +27,7 @@
 #include "core/strings/unicode.h"
 #include "gfx/bitmap/gBitmap.h"
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 // ------------------------------------------------------------------------
 

@@ -37,7 +37,7 @@
 
 #include "windowManager/sdl/sdlWindow.h"
 #include "platform/platformGL.h"
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 extern void loadGLCore();
 extern void loadGLExtensions(void* context);

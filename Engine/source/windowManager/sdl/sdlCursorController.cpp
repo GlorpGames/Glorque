@@ -27,7 +27,7 @@
 #include "windowManager/sdl/sdlCursorController.h"
 #include "platform/platformInput.h"
 
-#include "SDL.h"
+#include "SDL2/SDL.h"
 
 static struct { U32 id; SDL_SystemCursor resourceID; SDL_Cursor *cursor;} sgCursorShapeMap[]=
 {

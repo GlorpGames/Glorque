@@ -32,23 +32,27 @@ extern void mInstall_Library_SSE();
 
 static MRandomLCG sgPlatRandom;
 
+/*
+    TODO: make all these functions Darwin-ARM64 compatible
+ */
+
 U32 Platform::getMathControlState()
 {
-   U16 cw;
-   asm("fstcw %0" : "=m" (cw) :);
-   return cw;
+   // U16 cw;
+   // asm("MRS x0, FPCR" : "=m" (cw) :); // i don't know ARM64 assembly so this probably fucks stuff up, return 0
+   return 0;
 }
 
 void Platform::setMathControlState(U32 state)
 {
-   U16 cw = state;
-   asm("fldcw %0" : : "m" (cw));
+   // U16 cw = state;
+   // asm("MSR FPCR, x0" : : "m" (cw));
 }
 
 void Platform::setMathControlStateKnown()
 {
-   U16 cw = 0x27F;
-   asm("fldcw %0" : : "m" (cw));
+   // U16 cw = 0x27F;
+   // asm("MSR FPCR, x0" : : "m" (cw));
 }
 
 //--------------------------------------

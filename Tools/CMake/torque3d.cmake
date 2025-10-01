@@ -663,7 +663,7 @@ if (APPLE)
   addFramework("AudioToolbox")
   addLib("iconv")
   #set a few arch defaults
-  set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "OSX Architecture" FORCE)
+  set(CMAKE_OSX_ARCHITECTURES "arm64" CACHE STRING "OSX Architecture" FORCE)
   set(CMAKE_OSX_DEPLOYMENT_TARGET "10.9" CACHE STRING "OSX Deployment target" FORCE)
 endif()
 

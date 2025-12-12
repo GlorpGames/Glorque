@@ -193,9 +193,9 @@ bool GameConnection::client_cache_on = false;
 GameConnection::GameConnection()
 {
 #ifdef TORQUE_AFX_ENABLED
-   mRolloverObj = NULL;
-   mPreSelectedObj = NULL;
-   mSelectedObj = NULL;
+   mRolloverObj = nullptr;
+   mPreSelectedObj = nullptr;
+   mSelectedObj = nullptr;
    mChangedSelectedObj = false;
    mPreSelectTimestamp = 0;
    zoned_in = false;
@@ -206,8 +206,8 @@ GameConnection::GameConnection()
    server_cache_CRC = 0xffffffff;
 #endif 
    mLagging = false;
-   mControlObject = NULL;
-   mCameraObject = NULL;
+   mControlObject = nullptr;
+   mCameraObject = nullptr;
 
 #ifdef TORQUE_HIFI_NET
    mMoveList = new HifiMoveList();
@@ -221,14 +221,14 @@ GameConnection::GameConnection()
 
    mDataBlockModifiedKey = 0;
    mMaxDataBlockModifiedKey = 0;
-   mAuthInfo = NULL;
+   mAuthInfo = nullptr;
    mControlForceMismatch = false;
    mConnectArgc = 0;
 
-   for(U32 i = 0; i < MaxConnectArgs; i++)
-      mConnectArgv[i] = 0;
+   for(auto & i : mConnectArgv)
+      i = nullptr;
 
-   mJoinPassword = NULL;
+   mJoinPassword = nullptr;
 
    mMissionCRC = 0xffffffff;
 
@@ -269,7 +269,7 @@ GameConnection::GameConnection()
 
 GameConnection::~GameConnection()
 {
-   setDisplayDevice(NULL);
+   setDisplayDevice(nullptr);
    delete mAuthInfo;
    for(U32 i = 0; i < mConnectArgc; i++)
       dFree(mConnectArgv[i]);
@@ -288,8 +288,7 @@ void GameConnection::setVisibleGhostDistance(F32 dist)
    mVisibleGhostDistance = dist;
 }
 
-F32 GameConnection::getVisibleGhostDistance()
-{
+F32 GameConnection::getVisibleGhostDistance() const {
    return mVisibleGhostDistance;
 }
 
@@ -377,7 +376,7 @@ void GameConnection::onConnectionEstablished(bool isInitiator)
 
       const char *argv[MaxConnectArgs + 2];
       argv[0] = "onConnect";
-      argv[1] = NULL; // Filled in later
+      argv[1] = nullptr; // Filled in later
       for(U32 i = 0; i < mConnectArgc; i++)
          argv[i + 2] = mConnectArgv[i];
       // NOTE: Need to fallback to Con::execute() as IMPLEMENT_CALLBACK does not 

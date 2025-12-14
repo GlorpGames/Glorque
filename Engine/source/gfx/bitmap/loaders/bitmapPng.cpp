@@ -34,12 +34,6 @@
 #include "lpng/png.h"
 #include "zlib/zlib.h"
 
-#ifdef NULL
-#undef NULL
-#define NULL 0
-#endif
-
-
 static bool sReadPNG(Stream &stream, GBitmap *bitmap);
 
 /// Compression levels for PNGs range from 0-9.
@@ -65,6 +59,24 @@ static struct _privateRegisterPNG
 } sStaticRegisterPNG;
 
 
+constexpr void base_setIHDR( png_const_structrp png_ptr,
+                   png_inforp info_ptr,
+                   png_uint_32 width,
+                   png_uint_32 height,
+                   int bit_depth,
+                   int color_type,
+                   int interlace_method = 0,
+                   int compression_method = 0,
+                   int filter_method = 0) {
+   png_set_IHDR(png_ptr, info_ptr,
+                  width, height,
+                  bit_depth, color_type,  //         color type:   https://www.w3.org/TR/2025/REC-png-3-20250624/#6Colour-values
+                  interlace_method,       //   interlace method:   https://www.w3.org/TR/2025/REC-png-3-20250624/#8InterlaceMethods
+                  compression_method,     // compression method:   https://www.w3.org/TR/2025/REC-png-3-20250624/#10Compression
+                  filter_method);         //      filter method:   https://www.w3.org/TR/2025/REC-png-3-20250624/#9Filters
+}
+
+
 //-------------------------------------- Replacement I/O for standard LIBPng
 //                                        functions.  we don't wanna use
 //                                        FILE*'s...
@@ -72,7 +84,7 @@ static void pngReadDataFn(png_structp png_ptr,
                     png_bytep   data,
                     png_size_t  length)
 {
-   AssertFatal(png_get_io_ptr(png_ptr) != NULL, "No stream?");
+   AssertFatal(png_get_io_ptr(png_ptr) != nullptr, "No stream?");
 
    Stream *strm = (Stream*)png_get_io_ptr(png_ptr);
    bool success = strm->read(length, data);
@@ -85,7 +97,7 @@ static void pngWriteDataFn(png_structp png_ptr,
                      png_bytep   data,
                      png_size_t  length)
 {
-   AssertFatal(png_get_io_ptr(png_ptr) != NULL, "No stream?");
+   AssertFatal(png_get_io_ptr(png_ptr) != nullptr, "No stream?");
 
    Stream *strm = (Stream*)png_get_io_ptr(png_ptr);
    bool success = strm->write(length, data);
@@ -151,36 +163,36 @@ static bool sReadPNG(Stream &stream, GBitmap *bitmap)
 
    U32 prevWaterMark = FrameAllocator::getWaterMark();
    png_structp png_ptr = png_create_read_struct_2(PNG_LIBPNG_VER_STRING,
-      NULL,
+      nullptr,
       pngFatalErrorFn,
       pngWarningFn,
-      NULL,
+      nullptr,
       pngRealMallocFn,
       pngRealFreeFn);
 
-   if (png_ptr == NULL) 
+   if (png_ptr == nullptr)
    {
       FrameAllocator::setWaterMark(prevWaterMark);
       return false;
    }
 
    png_infop info_ptr = png_create_info_struct(png_ptr);
-   if (info_ptr == NULL) 
+   if (info_ptr == nullptr)
    {
       png_destroy_read_struct(&png_ptr,
-         (png_infopp)NULL,
-         (png_infopp)NULL);
+         (png_infopp)nullptr,
+         (png_infopp)nullptr);
 
       FrameAllocator::setWaterMark(prevWaterMark);
       return false;
    }
 
    png_infop end_info = png_create_info_struct(png_ptr);
-   if (end_info == NULL) 
+   if (end_info == nullptr)
    {
       png_destroy_read_struct(&png_ptr,
          &info_ptr,
-         (png_infopp)NULL);
+         (png_infopp)nullptr);
 
       FrameAllocator::setWaterMark(prevWaterMark);
       return false;
@@ -203,11 +215,11 @@ static bool sReadPNG(Stream &stream, GBitmap *bitmap)
    S32 color_type;
 
    png_get_IHDR(png_ptr, info_ptr,
-      &width, &height,             // obv.
-      &bit_depth, &color_type,     // obv.
-      NULL,                        // interlace
-      NULL,                        // compression_type
-      NULL);                       // filter_type
+      &width, &height,
+      &bit_depth, &color_type,     //         color type:   https://www.w3.org/TR/2025/REC-png-3-20250624/#6Colour-values
+      0,                     //   interlace method:   https://www.w3.org/TR/2025/REC-png-3-20250624/#8InterlaceMethods
+      0,                     // compression method:   https://www.w3.org/TR/2025/REC-png-3-20250624/#10Compression
+      0);                    //      filter method:   https://www.w3.org/TR/2025/REC-png-3-20250624/#9Filters
 
    // First, handle the color transformations.  We need this to read in the
    //  data as RGB or RGBA, _always_, with a maximal channel width of 8 bits.
@@ -230,35 +242,38 @@ static bool sReadPNG(Stream &stream, GBitmap *bitmap)
       transAlpha = true;
    }
 
-   if (color_type == PNG_COLOR_TYPE_PALETTE) 
-   {
-      png_set_expand(png_ptr);
-      format = transAlpha ? GFXFormatR8G8B8A8 : GFXFormatR8G8B8;
-   }
-   else if (color_type == PNG_COLOR_TYPE_GRAY) 
-   {
-      png_set_expand(png_ptr);
+   switch (color_type) {
+      case PNG_COLOR_TYPE_PALETTE:
+         png_set_expand(png_ptr);
+         format = transAlpha ? GFXFormatR8G8B8A8 : GFXFormatR8G8B8;
+         break;
 
-      if (bit_depth == 16)
-         format = GFXFormatR5G6B5;
-      else
-         format = GFXFormatA8;
-   }
-   else if (color_type == PNG_COLOR_TYPE_GRAY_ALPHA) 
-   {
-      png_set_expand(png_ptr);
-      png_set_gray_to_rgb(png_ptr);
-      format = GFXFormatR8G8B8A8;
-   }
-   else if (color_type == PNG_COLOR_TYPE_RGB) 
-   {
-      format = transAlpha ? GFXFormatR8G8B8A8 : GFXFormatR8G8B8;
-      png_set_expand(png_ptr);
-   }
-   else if (color_type == PNG_COLOR_TYPE_RGB_ALPHA) 
-   {
-      png_set_expand(png_ptr);
-      format = GFXFormatR8G8B8A8;
+      case PNG_COLOR_TYPE_GRAY:
+         png_set_expand(png_ptr);
+         if (bit_depth == 16)
+            format = GFXFormatR5G6B5;
+         else
+            format = GFXFormatA8;
+         break;
+
+      case PNG_COLOR_TYPE_GRAY_ALPHA:
+         png_set_expand(png_ptr);
+         png_set_gray_to_rgb(png_ptr);
+         format = GFXFormatR8G8B8A8;
+         break;
+
+      case PNG_COLOR_TYPE_RGB:
+         format = transAlpha ? GFXFormatR8G8B8A8 : GFXFormatR8G8B8;
+         png_set_expand(png_ptr);
+         break;
+
+      case PNG_COLOR_TYPE_RGB_ALPHA:
+         png_set_expand(png_ptr);
+         format = GFXFormatR8G8B8A8;
+         break;
+
+      default:
+         break;
    }
 
    // Update the info pointer with the result of the transformations
@@ -266,20 +281,21 @@ static bool sReadPNG(Stream &stream, GBitmap *bitmap)
    png_read_update_info(png_ptr, info_ptr);
 
    png_uint_32 rowBytes = png_get_rowbytes(png_ptr, info_ptr);
-   if (format == GFXFormatR8G8B8) 
-   {
-      AssertFatal(rowBytes == width * 3,
-         "Error, our rowbytes are incorrect for this transform... (3)");
-   }
-   else if (format == GFXFormatR8G8B8A8) 
-   {
-      AssertFatal(rowBytes == width * 4,
-         "Error, our rowbytes are incorrect for this transform... (4)");
-   }
-   else if (format == GFXFormatR5G6B5) 
-   {
-      AssertFatal(rowBytes == width * 2,
-         "Error, our rowbytes are incorrect for this transform... (2)");
+   switch (format) {
+      case GFXFormatR8G8B8:
+         AssertFatal(rowBytes == width * 3, "Error, our rowbytes are incorrect for this transform... (3)");
+         break;
+
+      case GFXFormatR8G8B8A8:
+         AssertFatal(rowBytes == width * 4, "Error, our rowbytes are incorrect for this transform... (4)");
+         break;
+
+      case GFXFormatR5G6B5:
+         AssertFatal(rowBytes == width * 2, "Error, our rowbytes are incorrect for this transform... (2)");
+         break;
+
+      default:
+         break;
    }
 
    // actually allocate the bitmap space...
@@ -301,7 +317,7 @@ static bool sReadPNG(Stream &stream, GBitmap *bitmap)
    //  as quickly as possible...
    //png_read_end(png_ptr, end_info);
    delete [] rowPointers;
-   png_read_end(png_ptr, NULL);
+   png_read_end(png_ptr, nullptr);
    png_destroy_read_struct(&png_ptr, &info_ptr, &end_info);
 
    // Ok, the image is read in, now we need to finish up the initialization,
@@ -340,19 +356,19 @@ static bool _writePNG(GBitmap *bitmap, Stream &stream, U32 compressionLevel, U32
       return false;
 
    png_structp png_ptr = png_create_write_struct_2(PNG_LIBPNG_VER_STRING,
-      NULL,
+      nullptr,
       pngFatalErrorFn,
       pngWarningFn,
-      NULL,
+      nullptr,
       pngMallocFn,
       pngFreeFn);
-   if (png_ptr == NULL)
+   if (png_ptr == nullptr)
       return (false);
 
    png_infop info_ptr = png_create_info_struct(png_ptr);
-   if (info_ptr == NULL)
+   if (info_ptr == nullptr)
    {
-      png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+      png_destroy_write_struct(&png_ptr, nullptr);
       return false;
    }
 
@@ -373,48 +389,38 @@ static bool _writePNG(GBitmap *bitmap, Stream &stream, U32 compressionLevel, U32
 
    U32   width = bitmap->getWidth();
    U32   height = bitmap->getHeight();
+   auto setIHDR = [png_ptr, info_ptr, width, height](
+                      const int bit_depth,
+                      const int color_type) {
+      base_setIHDR(png_ptr, info_ptr,
+                   width, height,
+                   bit_depth, color_type);
+   };
 
-   if (format == GFXFormatR8G8B8)
-   {
-      png_set_IHDR(png_ptr, info_ptr,
-         width, height,               // the width & height
-         8, PNG_COLOR_TYPE_RGB,       // bit_depth, color_type,
-         NULL,                        // no interlace
-         NULL,                        // compression type
-         NULL);                       // filter type
-   }
-   else if (format == GFXFormatR8G8B8A8 || format == GFXFormatR8G8B8X8 || format == GFXFormatR8G8B8A8_LINEAR_FORCE)
-   {
-      png_set_IHDR(png_ptr, info_ptr,
-         width, height,               // the width & height
-         8, PNG_COLOR_TYPE_RGB_ALPHA, // bit_depth, color_type,
-         NULL,                        // no interlace
-         NULL,                        // compression type
-         NULL);                       // filter type
-   }
-   else if (format == GFXFormatA8)
-   {
-      png_set_IHDR(png_ptr, info_ptr,
-         width, height,               // the width & height
-         8, PNG_COLOR_TYPE_GRAY,      // bit_depth, color_type,
-         NULL,                        // no interlace
-         NULL,                        // compression type
-         NULL);                       // filter type
-   }
-   else if (format == GFXFormatR5G6B5) 
-   {
-      png_set_IHDR(png_ptr, info_ptr,
-         width, height,               // the width & height
-         16, PNG_COLOR_TYPE_GRAY,     // bit_depth, color_type,
-         PNG_INTERLACE_NONE,          // no interlace
-         PNG_COMPRESSION_TYPE_DEFAULT,   // compression type
-         PNG_FILTER_TYPE_DEFAULT);       // filter type
-      
+   if (format == GFXFormatR5G6B5) {
+      setIHDR(16, PNG_COLOR_TYPE_GRAY);
       png_color_8_struct sigBit = { 0 };
       sigBit.gray = 16;
       png_set_sBIT(png_ptr, info_ptr, &sigBit );
-
       png_set_swap( png_ptr );
+   }
+   switch (format) {
+      case GFXFormatR8G8B8:
+         setIHDR(8, PNG_COLOR_TYPE_RGB);
+         break;
+
+      case GFXFormatR8G8B8A8:
+      case GFXFormatR8G8B8X8:
+      case GFXFormatR8G8B8A8_LINEAR_FORCE:
+         setIHDR(8, PNG_COLOR_TYPE_RGB_ALPHA);
+         break;
+
+      case GFXFormatA8:
+         setIHDR(8, PNG_COLOR_TYPE_GRAY);
+         break;
+
+      default:
+         AssertFatal(true, "_writePNG: ONLY RGB bitmap writing supported at this time.");
    }
 
    png_write_info(png_ptr, info_ptr);
@@ -429,7 +435,7 @@ static bool _writePNG(GBitmap *bitmap, Stream &stream, U32 compressionLevel, U32
    // Write FXT1 data if present...
 
    png_write_end(png_ptr, info_ptr);
-   png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
+   png_destroy_write_struct(&png_ptr, (png_infopp)nullptr);
 
    return true;
 }
@@ -460,6 +466,7 @@ static bool sWritePNG(GBitmap *bitmap, Stream &stream, U32 compressionLevel)
       PNG_FILTER_PAETH,
       PNG_ALL_FILTERS };
 
+   // Triston: TODO: replace whatever voodoo this is with std::iterators
    U32 minSize      = 0xFFFFFFFF;
    U32 bestStrategy = 0xFFFFFFFF;
    U32 bestFilter   = 0xFFFFFFFF;
@@ -514,7 +521,7 @@ struct DeferredPNGWriterData {
    U32 height;   
 };
 DeferredPNGWriter::DeferredPNGWriter() : 
-   mData( NULL ),
+   mData( nullptr ),
    mActive(false)
 {
    mData = new DeferredPNGWriterData();
@@ -541,19 +548,19 @@ bool DeferredPNGWriter::begin( GFXFormat format, S32 width, S32 height, Stream &
       return false;
 
    mData->png_ptr = png_create_write_struct_2(PNG_LIBPNG_VER_STRING,
-      NULL,
+      nullptr,
       pngFatalErrorFn,
       pngWarningFn,
-      NULL,
+      nullptr,
       pngRealMallocFn,
       pngRealFreeFn);
-   if (mData->png_ptr == NULL)
+   if (mData->png_ptr == nullptr)
       return (false);
 
    mData->info_ptr = png_create_info_struct(mData->png_ptr);
-   if (mData->info_ptr == NULL)
+   if (mData->info_ptr == nullptr)
    {
-      png_destroy_write_struct(&mData->png_ptr, (png_infopp)NULL);
+      png_destroy_write_struct(&mData->png_ptr, nullptr);
       return false;
    }
 
@@ -571,48 +578,40 @@ bool DeferredPNGWriter::begin( GFXFormat format, S32 width, S32 height, Stream &
    // or PNG_COLOR_TYPE_RGB_ALPHA.  interlace is either PNG_INTERLACE_NONE or
    // PNG_INTERLACE_ADAM7, and the compression_type and filter_type MUST
    // currently be PNG_COMPRESSION_TYPE_BASE and PNG_FILTER_TYPE_BASE. REQUIRED
-   
-   if (format == GFXFormatR8G8B8)
-   {
-      png_set_IHDR(mData->png_ptr, mData->info_ptr,
-         width, height,               // the width & height
-         8, PNG_COLOR_TYPE_RGB,       // bit_depth, color_type,
-         NULL,                        // no interlace
-         NULL,                        // compression type
-         NULL);                       // filter type
-   }
-   else if (format == GFXFormatR8G8B8A8 || format == GFXFormatR8G8B8X8)
-   {
-      png_set_IHDR(mData->png_ptr, mData->info_ptr,
-         width, height,               // the width & height
-         8, PNG_COLOR_TYPE_RGB_ALPHA, // bit_depth, color_type,
-         NULL,                        // no interlace
-         NULL,                        // compression type
-         NULL);                       // filter type
-   }
-   else if (format == GFXFormatA8)
-   {
-      png_set_IHDR(mData->png_ptr, mData->info_ptr,
-         width, height,               // the width & height
-         8, PNG_COLOR_TYPE_GRAY,      // bit_depth, color_type,
-         NULL,                        // no interlace
-         NULL,                        // compression type
-         NULL);                       // filter type
-   }
-   else if (format == GFXFormatR5G6B5) 
-   {
-      png_set_IHDR(mData->png_ptr, mData->info_ptr,
-         width, height,               // the width & height
-         16, PNG_COLOR_TYPE_GRAY,     // bit_depth, color_type,
-         PNG_INTERLACE_NONE,          // no interlace
-         PNG_COMPRESSION_TYPE_DEFAULT,   // compression type
-         PNG_FILTER_TYPE_DEFAULT);       // filter type
-      
+   auto setIHDR = [width, height, this] (
+                      const int bit_depth,
+                      const int color_type){
+      base_setIHDR(mData->png_ptr, mData->info_ptr,
+                     width, height,
+                     bit_depth, color_type);
+   };
+
+   if (GFXFormatR5G6B5) {
+      setIHDR(16, PNG_COLOR_TYPE_GRAY);
+
       png_color_8_struct sigBit = { 0 };
       sigBit.gray = 16;
       png_set_sBIT(mData->png_ptr, mData->info_ptr, &sigBit );
 
       png_set_swap( mData->png_ptr );
+   }
+
+   switch (format) {
+      case GFXFormatR8G8B8:
+         setIHDR(8, PNG_COLOR_TYPE_RGB);
+         break;
+
+      case GFXFormatR8G8B8A8:
+      case GFXFormatR8G8B8X8:
+         setIHDR(8, PNG_COLOR_TYPE_RGB_ALPHA);
+         break;
+
+      case GFXFormatA8:
+         setIHDR(8, PNG_COLOR_TYPE_GRAY);
+         break;
+
+      default:
+         break;
    }
 
    png_write_info(mData->png_ptr, mData->info_ptr);

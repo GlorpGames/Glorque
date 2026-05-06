@@ -66,7 +66,7 @@ MODULE_BEGIN( 3D )
 
 MODULE_END;
 
-
+// TODO: Fix this, static analysis hates that these aren't const
 static S32 gEaseInOut = Ease::InOut;
 static S32 gEaseIn = Ease::In;
 static S32 gEaseOut = Ease::Out;
@@ -341,7 +341,7 @@ bool GameProcessCameraQuery(CameraQuery *query)
 
    if (connection && connection->getControlCameraTransform(0.032f, &query->cameraMatrix))
    {
-      query->object = dynamic_cast<GameBase*>(connection->getCameraObject());
+      query->object = connection->getCameraObject();
       query->nearPlane = gClientSceneGraph->getNearClip();
 
       // Scale the normal visible distance by the performance 

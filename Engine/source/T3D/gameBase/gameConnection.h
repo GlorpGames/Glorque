@@ -169,7 +169,7 @@ public:
    bool canRemoteCreate();
 
    void setVisibleGhostDistance(F32 dist);
-   F32 getVisibleGhostDistance();
+   F32 getVisibleGhostDistance() const;
 
 private:
    /// @name Connection State

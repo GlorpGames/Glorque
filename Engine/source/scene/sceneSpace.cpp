@@ -56,7 +56,7 @@ SceneSpace::SceneSpace()
 
 SceneSpace::~SceneSpace()
 {
-   SAFE_DELETE( mEditorRenderMaterial );
+   safe_delete( mEditorRenderMaterial );
 }
 
 //-----------------------------------------------------------------------------
@@ -103,7 +103,7 @@ void SceneSpace::onEditorEnable()
 
 void SceneSpace::onEditorDisable()
 {
-   SAFE_DELETE( mEditorRenderMaterial );
+   safe_delete( mEditorRenderMaterial );
 }
 
 //-----------------------------------------------------------------------------

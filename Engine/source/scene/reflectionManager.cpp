@@ -103,7 +103,7 @@ void ReflectionManager::initConsole()
 
 ReflectionManager::~ReflectionManager()
 {
-   SAFE_DELETE( mTimer );
+   safe_delete( mTimer );
    AssertFatal( mReflectors.size() == 0, "ReflectionManager, some reflectors were left nregistered!" );
 
    GFXDevice::getDeviceEventSignal().remove( this, &ReflectionManager::_handleDeviceEvent );

@@ -68,7 +68,7 @@ RenderMeshExample::RenderMeshExample()
 RenderMeshExample::~RenderMeshExample()
 {
    if ( mMaterialInst )
-      SAFE_DELETE( mMaterialInst );
+      safe_delete( mMaterialInst );
 }
 
 //-----------------------------------------------------------------------------
@@ -255,7 +255,7 @@ void RenderMeshExample::updateMaterial()
    if ( mMaterialInst && mMaterialName.equal( mMaterialInst->getMaterial()->getName(), String::NoCase ) )
       return;
 
-   SAFE_DELETE( mMaterialInst );
+   safe_delete( mMaterialInst );
 
    mMaterialInst = MATMGR->createMatInstance( mMaterialName, getGFXVertexFormat< VertexType >() );
    if ( !mMaterialInst )

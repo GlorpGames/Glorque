@@ -50,7 +50,7 @@ ConditionerFeature::ConditionerFeature( const GFXFormat bufferFormat )
 ConditionerFeature::~ConditionerFeature()
 {
    for( U32 i = 0; i < NumMethodTypes; i++ )
-      SAFE_DELETE( mMethodDependency[i] );
+      safe_delete( mMethodDependency[i] );
 
    smConditioners.remove( this );
    smDirtyConditioners = true;

@@ -177,8 +177,8 @@ void GFXTextureObject::kill()
    mDevice->mTextureManager->deleteTexture(this);
 
    // Delete the stored bitmap.
-   SAFE_DELETE(mBitmap)
-   SAFE_DELETE(mDDS);
+   safe_delete(mBitmap);
+   safe_delete(mDDS);
 
    // Clean up linked list
    if(mNext)

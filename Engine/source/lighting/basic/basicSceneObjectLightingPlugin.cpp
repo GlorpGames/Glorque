@@ -66,7 +66,7 @@ BasicSceneObjectLightingPlugin::BasicSceneObjectLightingPlugin(SceneObject* pare
 
 BasicSceneObjectLightingPlugin::~BasicSceneObjectLightingPlugin()
 {
-   SAFE_DELETE( mShadow );
+   safe_delete( mShadow );
    
    // Delete us from the list.
    smPluginInstances.remove( this );
@@ -74,7 +74,7 @@ BasicSceneObjectLightingPlugin::~BasicSceneObjectLightingPlugin()
 
 void BasicSceneObjectLightingPlugin::reset()
 {
-   SAFE_DELETE( mShadow );
+   safe_delete( mShadow );
 }
 
 void BasicSceneObjectLightingPlugin::cleanupPluginInstances()

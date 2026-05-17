@@ -52,7 +52,7 @@ GBitmap* ScreenShotD3D11::_captureBackBuffer()
    if (FAILED(hr))
    {
       //cleanup
-      SAFE_DELETE_ARRAY(pData);
+      safe_delete_array(pData);
       SAFE_RELEASE(pNewTexture);
       return NULL;
    }
@@ -88,7 +88,7 @@ GBitmap* ScreenShotD3D11::_captureBackBuffer()
    }
 
    //cleanup
-   SAFE_DELETE_ARRAY(pData);
+   safe_delete_array(pData);
    SAFE_RELEASE(pNewTexture);
    
 

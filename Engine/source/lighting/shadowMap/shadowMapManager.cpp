@@ -146,7 +146,7 @@ void ShadowMapManager::deactivate()
    GFXTextureManager::removeEventDelegate( this, &ShadowMapManager::_onTextureEvent );
    getSceneManager()->getPreRenderSignal().remove( this, &ShadowMapManager::_onPreRender );
 
-   SAFE_DELETE(mShadowMapPass);
+   safe_delete(mShadowMapPass);
    mTapRotationTex = NULL;
 
    // Clean up our shadow texture memory.

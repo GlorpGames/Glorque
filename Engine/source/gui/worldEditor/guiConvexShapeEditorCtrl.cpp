@@ -105,7 +105,7 @@ void GuiConvexEditorCtrl::onRemove()
 {
    SceneManager::getPreRenderSignal().remove( this, &GuiConvexEditorCtrl::_prepRenderImage );
 
-   SAFE_DELETE( mCreateTool );
+   safe_delete( mCreateTool );
 
    Parent::onRemove();
 }

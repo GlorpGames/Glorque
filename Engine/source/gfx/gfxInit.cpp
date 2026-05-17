@@ -137,7 +137,7 @@ void GFXInit::cleanup()
    }
 
    if( smRegisterDeviceSignal )
-      SAFE_DELETE( smRegisterDeviceSignal );
+      safe_delete( smRegisterDeviceSignal );
 }
 
 bool GFXInit::compareAdapterOutputDevice(const GFXAdapter* adapter, const char* outputDevice)

@@ -131,10 +131,10 @@ PlayerControllerComponent::~PlayerControllerComponent()
    for (S32 i = 0; i < mFields.size(); ++i)
    {
       ComponentField &field = mFields[i];
-      SAFE_DELETE_ARRAY(field.mFieldDescription);
+      safe_delete_array(field.mFieldDescription);
    }
 
-   SAFE_DELETE_ARRAY(mDescription);
+   safe_delete_array(mDescription);
 }
 
 IMPLEMENT_CO_NETOBJECT_V1(PlayerControllerComponent);
@@ -153,7 +153,7 @@ void PlayerControllerComponent::onRemove()
 {
    Parent::onRemove();
 
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 }
 
 void PlayerControllerComponent::onComponentAdd()
@@ -201,7 +201,7 @@ void PlayerControllerComponent::updatePhysics(PhysicsCollision *collision)
    mPhysicsWorld = PHYSICSMGR->getWorld(isServerObject() ? "server" : "client");
 
    //first, clear the old physRep
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    mPhysicsRep = PHYSICSMGR->createPlayer();
 

@@ -89,7 +89,7 @@ CollisionTrigger::~CollisionTrigger()
 {
    delete mConvexList;
    mConvexList = NULL;
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 }
 
 bool CollisionTrigger::castRay(const Point3F &start, const Point3F &end, RayInfo* info)
@@ -386,7 +386,7 @@ void CollisionTrigger::setTriggerPolyhedron(const Polyhedron& rPolyhedron)
 
    mClippedList.setBaseTransform(base);
 
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    if (PHYSICSMGR)
    {

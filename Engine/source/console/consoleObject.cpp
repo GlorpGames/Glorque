@@ -289,7 +289,7 @@ void AbstractClassRep::shutdown()
    for (U32 group = 0; group < NetClassGroupsCount; group++)
       for(U32 type = 0; type < NetClassTypesCount; type++)
          if( classTable[ group ][ type ] )
-            SAFE_DELETE_ARRAY( classTable[ group ][ type ] );
+            safe_delete_array( classTable[ group ][ type ] );
 
    initialized = false;
 }

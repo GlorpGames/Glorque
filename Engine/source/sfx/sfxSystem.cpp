@@ -347,7 +347,7 @@ SFXSystem::~SFXSystem()
    // Delete subsystems.
    
    if( mSoundscapeMgr )
-      SAFE_DELETE( mSoundscapeMgr );
+      safe_delete( mSoundscapeMgr );
       
    // Delete device if we still have one.
    

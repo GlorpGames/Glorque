@@ -735,13 +735,13 @@ bool MeshRoad::onAdd()
 
 void MeshRoad::onRemove()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    mConvexList->nukeList();
 
    for ( U32 i = 0; i < SurfaceCount; i++ )
    {
-      SAFE_DELETE( mMatInst[i] );
+      safe_delete( mMatInst[i] );
    }
 
    removeFromScene();
@@ -898,7 +898,7 @@ void MeshRoad::_initMaterial()
    for ( U32 i = 0; i < SurfaceCount; i++ )
    {
       if ( mMatInst[i] )
-         SAFE_DELETE( mMatInst[i] );
+         safe_delete( mMatInst[i] );
 
       if ( mMaterial[i] )
          mMatInst[i] = mMaterial[i]->createMatInstance();
@@ -1724,7 +1724,7 @@ void MeshRoad::_generateSlices()
 
 void MeshRoad::_generateSegments()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    mSegments.clear();
 

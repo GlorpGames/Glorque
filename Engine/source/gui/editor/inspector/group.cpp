@@ -109,7 +109,7 @@ bool GuiInspectorGroup::createContent()
    mStack->setDataField( StringTable->insert("profile"), NULL, "GuiInspectorStackProfile" );
    if( !mStack->registerObject() )
    {
-      SAFE_DELETE( mStack );
+      safe_delete( mStack );
       return false;
    }
 
@@ -490,7 +490,7 @@ bool GuiInspectorGroup::inspectGroup()
             }
             else
             {
-               SAFE_DELETE( fieldGui );
+               safe_delete( fieldGui );
             }
          }
       }

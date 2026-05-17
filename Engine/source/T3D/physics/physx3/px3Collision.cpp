@@ -200,6 +200,6 @@ bool Px3Collision::addHeightfield( const U16 *heights, const bool *holes, U32 bl
 
    mColShapes.push_back(desc);
 
-   SAFE_DELETE(samples);
+   safe_delete(samples);
    return true;
 }

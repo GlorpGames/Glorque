@@ -286,7 +286,7 @@ GFXShader* ShaderData::_createShader( const Vector<GFXShaderMacro> &macros )
    // If we failed to load the shader then
    // cleanup and return NULL.
    if ( !success )
-      SAFE_DELETE( shader );
+      safe_delete( shader );
 
    return shader;
 }

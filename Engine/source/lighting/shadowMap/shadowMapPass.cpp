@@ -128,7 +128,7 @@ ShadowMapPass::ShadowMapPass(LightManager* lightManager, ShadowMapManager* shado
 
 ShadowMapPass::~ShadowMapPass()
 {
-   SAFE_DELETE( mTimer );
+   safe_delete( mTimer );
 
    if ( mShadowRPM )
       mShadowRPM->deleteObject();

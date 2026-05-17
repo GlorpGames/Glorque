@@ -32,8 +32,14 @@
 /// @brief Safely delete an object and set the pointer to NULL
 ///
 /// @param a Object to delete
-/// @see #SAFE_DELETE_ARRAY(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
+/// @see #safe_delete_array(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
 //-----------------------------------------------------------------------------
+template <typename T>
+inline void safe_delete(T*& ptr) {
+    delete(ptr);
+    ptr = nullptr;
+}
+
 #define SAFE_DELETE(a) {delete (a); (a) = NULL; }
 
 #undef  SAFE_DELETE_ARRAY
@@ -42,9 +48,15 @@
 /// @brief Safely delete an array and set the pointer to NULL
 ///
 /// @param a Array to delete
-/// @see #SAFE_DELETE(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
+/// @see #safe_delete(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
 //-----------------------------------------------------------------------------
-#define SAFE_DELETE_ARRAY(a) { delete [] (a); (a) = NULL; }
+#define safe_delete_array(a) { delete [] (a); (a) = NULL; }
+
+template <typename T>
+inline void safe_delete_array(T*& ptr) {
+    delete[](ptr);
+    ptr = nullptr;
+}
 
 #undef  SAFE_DELETE_OBJECT
 
@@ -52,9 +64,18 @@
 /// @brief Safely delete a SimObject and set the pointer to NULL
 ///
 /// @param a Object to delete
-/// @see #SAFE_DELETE_ARRAY(), #SAFE_DELETE(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
+/// @see #safe_delete_array(), #safe_delete(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
 //-----------------------------------------------------------------------------
 #define SAFE_DELETE_OBJECT(a) { if( (a) != NULL ) (a)->deleteObject(); (a) = NULL; }
+
+template <class T>
+    requires requires (T& ptr) {ptr->deleteObject();}
+inline void safe_delete_object(T& ptr) {
+    if (ptr != nullptr) {
+        ptr->deleteObject();
+        ptr = nullptr;
+    }
+}
 
 #undef  SAFE_FREE
 
@@ -62,7 +83,7 @@
 /// @brief Safely free memory and set the pointer to NULL
 ///
 /// @param a Pointer to memory to free
-/// @see #SAFE_DELETE_ARRAY(), #SAFE_DELETE_OBJECT(), #SAFE_DELETE(), #SAFE_FREE_REFERENCE()
+/// @see #safe_delete_array(), #SAFE_DELETE_OBJECT(), #safe_delete(), #SAFE_FREE_REFERENCE()
 //-----------------------------------------------------------------------------
 #define SAFE_FREE(a) { if( (a) != NULL ) dFree ((void *)a); (a) = NULL; }
 
@@ -74,7 +95,7 @@
 /// @brief Safely free a reference to a Message and set the pointer to NULL
 ///
 /// @param a Pointer to message to free
-/// @see #SAFE_DELETE_ARRAY(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_DELETE()
+/// @see #safe_delete_array(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #safe_delete()
 //-----------------------------------------------------------------------------
 #define SAFE_FREE_REFERENCE(a) { if((a) != NULL) (a)->freeReference(); (a) = NULL; }
 
@@ -84,7 +105,7 @@
 /// @brief Synonym for SAFE_FREE_REFERENCE()
 ///
 /// @param a Object to delete
-/// @see #SAFE_DELETE(), #SAFE_DELETE_ARRAY(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
+/// @see #safe_delete(), #safe_delete_array(), #SAFE_DELETE_OBJECT(), #SAFE_FREE(), #SAFE_FREE_REFERENCE()
 //-----------------------------------------------------------------------------
 #define SAFE_DELETE_MESSAGE   SAFE_FREE_REFERENCE
 

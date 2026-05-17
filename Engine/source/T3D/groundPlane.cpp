@@ -90,10 +90,10 @@ GroundPlane::GroundPlane()
 GroundPlane::~GroundPlane()
 {
    if( mMaterial )
-      SAFE_DELETE( mMaterial );
+      safe_delete( mMaterial );
 
    mConvexList->nukeList();
-   SAFE_DELETE( mConvexList );
+   safe_delete( mConvexList );
 }
 
 void GroundPlane::initPersistFields()
@@ -150,7 +150,7 @@ bool GroundPlane::onAdd()
 
 void GroundPlane::onRemove()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    removeFromScene();
    Parent::onRemove();
@@ -225,7 +225,7 @@ void GroundPlane::_updateMaterial()
          mMaterialName.compare( mMaterial->getMaterial()->getName() ) == 0 )
       return;
 
-   SAFE_DELETE( mMaterial );
+   safe_delete( mMaterial );
 
    mMaterial = MATMGR->createMatInstance( mMaterialName, getGFXVertexFormat< VertexType >() );
    if ( !mMaterial )

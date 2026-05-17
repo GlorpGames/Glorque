@@ -66,10 +66,10 @@ TerrCell::TerrCell()
 
 TerrCell::~TerrCell()
 {
-   SAFE_DELETE( mMaterial );
+   safe_delete( mMaterial );
 
    for ( U32 i=0; i < 4; i++ )
-      SAFE_DELETE( mChildren[i] );
+      safe_delete( mChildren[i] );
    deleteZodiacVertexBuffer();
 }
 
@@ -1091,7 +1091,7 @@ TerrainCellMaterial* TerrCell::getMaterial()
 
 void TerrCell::deleteMaterials()
 {
-   SAFE_DELETE( mMaterial );
+   safe_delete( mMaterial );
 
    for ( U32 i = 0; i < 4; i++ )
       if ( mChildren[i] ) 

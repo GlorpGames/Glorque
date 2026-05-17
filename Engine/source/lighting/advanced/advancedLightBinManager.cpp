@@ -143,7 +143,7 @@ AdvancedLightBinManager::~AdvancedLightBinManager()
 {
    _deleteLightMaterials();
 
-   SAFE_DELETE(mConditioner);
+   safe_delete(mConditioner);
 
    Con::NotifyDelegate callback( this, &AdvancedLightBinManager::_deleteLightMaterials );
    Con::removeVariableNotify( "$pref::shadows::filterMode", callback );
@@ -630,7 +630,7 @@ AdvancedLightBinManager::LightMaterialInfo::LightMaterialInfo( const String &mat
 
 AdvancedLightBinManager::LightMaterialInfo::~LightMaterialInfo()
 {
-   SAFE_DELETE(matInstance);
+   safe_delete(matInstance);
 }
 
 void AdvancedLightBinManager::LightMaterialInfo::setViewParameters(  const F32 _zNear, 

@@ -235,7 +235,7 @@ bool GFXDevice::destroy()
 
    if(smGFXDevice)
       smGFXDevice->preDestroy();
-   SAFE_DELETE(smGFXDevice);
+   safe_delete(smGFXDevice);
 
    return true;
 }
@@ -243,7 +243,7 @@ bool GFXDevice::destroy()
 void GFXDevice::preDestroy()
 {
    // Delete draw util
-   SAFE_DELETE( mDrawer );
+   safe_delete( mDrawer );
 }
 
 GFXDevice::~GFXDevice()
@@ -275,8 +275,8 @@ GFXDevice::~GFXDevice()
    GFXPrimitiveBuffer::dumpActivePBs();
 #endif
 
-   SAFE_DELETE( mTextureManager );
-   SAFE_DELETE( mFrameTime );
+   safe_delete( mTextureManager );
+   safe_delete( mFrameTime );
 
    // Clear out our state block references
    mCurrentStateBlocks.clear();

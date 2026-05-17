@@ -79,8 +79,8 @@ TerrainCellMaterial::TerrainCellMaterial()
 
 TerrainCellMaterial::~TerrainCellMaterial()
 {
-   SAFE_DELETE( mDeferredMat );
-   SAFE_DELETE( mReflectMat );   
+   safe_delete( mDeferredMat );
+   safe_delete( mReflectMat );
    smAllMaterials.remove( this );
 }
 

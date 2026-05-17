@@ -342,7 +342,7 @@ bool GuiControl::processArguments(S32 argc, ConsoleValueRef *argv)
          }
          else
          {
-            SAFE_DELETE( mAddGroup );
+            safe_delete( mAddGroup );
             return false;
          }
       }

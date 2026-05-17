@@ -90,14 +90,14 @@ FileObject::FileObject()
 
 FileObject::~FileObject()
 {
-   SAFE_DELETE_ARRAY(mFileBuffer);
-   SAFE_DELETE(stream);
+   safe_delete_array(mFileBuffer);
+   safe_delete(stream);
 }
 
 void FileObject::close()
 {
-   SAFE_DELETE(stream);
-   SAFE_DELETE_ARRAY(mFileBuffer);
+   safe_delete(stream);
+   safe_delete_array(mFileBuffer);
    mFileBuffer = NULL;
    mBufferSize = mCurPos = 0;
 }

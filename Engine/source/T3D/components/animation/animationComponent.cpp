@@ -100,10 +100,10 @@ AnimationComponent::~AnimationComponent()
    for(S32 i = 0;i < mFields.size();++i)
    {
       ComponentField &field = mFields[i];
-      SAFE_DELETE_ARRAY(field.mFieldDescription);
+      safe_delete_array(field.mFieldDescription);
    }
 
-   SAFE_DELETE_ARRAY(mDescription);
+   safe_delete_array(mDescription);
 }
 
 IMPLEMENT_CO_NETOBJECT_V1(AnimationComponent);

@@ -54,12 +54,12 @@ void BtBody::_releaseActor()
    {
       mWorld->getDynamicsWorld()->removeRigidBody( mActor );
       mActor->setUserPointer( NULL );
-      SAFE_DELETE( mActor );
+      safe_delete( mActor );
    }
 
-   SAFE_DELETE( mCompound );
-   SAFE_DELETE( mCenterOfMass );
-   SAFE_DELETE( mInvCenterOfMass );
+   safe_delete( mCompound );
+   safe_delete( mCenterOfMass );
+   safe_delete( mInvCenterOfMass );
    
    mColShape = NULL;
 }

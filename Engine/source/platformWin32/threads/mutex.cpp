@@ -47,7 +47,7 @@ Mutex::~Mutex()
 {
    AssertFatal( TryEnterCriticalSection( &mData->mCriticalSection ), "Mutex::~Mutex - Critical section is locked!" );
    DeleteCriticalSection( &mData->mCriticalSection );
-   SAFE_DELETE( mData );
+   safe_delete( mData );
 }
 
 //-----------------------------------------------------------------------------

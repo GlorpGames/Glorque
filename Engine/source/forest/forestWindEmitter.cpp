@@ -400,7 +400,7 @@ void ForestWindEmitter::onRemove()
       //Projectile::getGhostReceivedSignal().remove( this, &ForestWindEmitter::_onMountObjectGhostReceived );
 
       WINDMGR->removeEmitter( this );
-      SAFE_DELETE( mWind );
+      safe_delete( mWind );
    }
 
    // If we are editing the mission then remove

@@ -355,7 +355,7 @@ SFXDevice* SFXFMODProvider::createDevice( const String& deviceName, bool useHard
 
    SFXFMODDevice* device = new SFXFMODDevice(this, &mFMod, 0, info->name );
    if( !device->_init() )
-      SAFE_DELETE( device );
+      safe_delete( device );
 
    return device;
 }

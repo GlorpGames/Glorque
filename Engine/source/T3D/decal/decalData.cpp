@@ -111,7 +111,7 @@ DecalData::DecalData()
 
 DecalData::~DecalData()
 {
-   SAFE_DELETE( matInst );
+   safe_delete( matInst );
 }
 
 bool DecalData::onAdd()
@@ -309,7 +309,7 @@ void DecalData::unpackData( BitStream *stream )
 
 void DecalData::_initMaterial()
 {
-   SAFE_DELETE( matInst );
+   safe_delete( matInst );
 
    if ( material )
       matInst = material->createMatInstance();
@@ -325,7 +325,7 @@ void DecalData::_initMaterial()
    if( !matInst->isValid() )
    {
       Con::errorf( "DecalData::_initMaterial - failed to create material instance for '%s'", materialName.c_str() );
-      SAFE_DELETE( matInst );
+      safe_delete( matInst );
       matInst = MATMGR->createMatInstance( "WarningMaterial" );
       matInst->init( MATMGR->getDefaultFeatures(), getGFXVertexFormat< DecalVertex >() );
    }

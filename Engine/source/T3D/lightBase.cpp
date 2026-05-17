@@ -83,7 +83,7 @@ LightBase::LightBase()
 
 LightBase::~LightBase()
 {
-   SAFE_DELETE( mLight );
+   safe_delete( mLight );
 }
 
 void LightBase::initPersistFields()

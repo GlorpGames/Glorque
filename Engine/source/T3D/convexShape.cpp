@@ -245,7 +245,7 @@ ConvexShape::ConvexShape()
 ConvexShape::~ConvexShape()
 {
    if ( mMaterialInst )
-      SAFE_DELETE( mMaterialInst );
+      safe_delete( mMaterialInst );
 
    delete mConvexList;
    mConvexList = NULL;
@@ -354,7 +354,7 @@ void ConvexShape::onRemove()
 
    mConvexList->nukeList();
 
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    Parent::onRemove();
 }
@@ -1041,7 +1041,7 @@ void ConvexShape::_updateMaterial()
    if ( mMaterialInst && mMaterialName.equal( mMaterialInst->getMaterial()->getName(), String::NoCase ) )
       return;
 
-   SAFE_DELETE( mMaterialInst );
+   safe_delete( mMaterialInst );
 
    Material *material;
    
@@ -1063,7 +1063,7 @@ void ConvexShape::_updateMaterial()
 
    if ( !mMaterialInst->isValid() )
    {
-      SAFE_DELETE( mMaterialInst );
+      safe_delete( mMaterialInst );
    }
 }
 
@@ -1170,7 +1170,7 @@ void ConvexShape::_updateGeometry( bool updateCollision )
 
 void ConvexShape::_updateCollision()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    if ( !PHYSICSMGR )
       return;

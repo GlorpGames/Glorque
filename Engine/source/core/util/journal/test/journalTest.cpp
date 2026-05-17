@@ -148,7 +148,7 @@ TEST_FIX(Journal, DynamicSignals)
    rec.dynamicA->trigger(8, 8);
    rec.dynamicB->trigger(9, 'a');
    testEvent.trigger(3);
-   SAFE_DELETE(rec.dynamicB); // Test a deletion.
+   safe_delete(rec.dynamicB); // Test a deletion.
    rec.dynamicC->trigger(8, 1);
    rec.dynamicC->trigger(8, 1);
 
@@ -164,9 +164,9 @@ TEST_FIX(Journal, DynamicSignals)
    Journal::Stop();
 
    // Also kill our remaining dynamic signals.
-   SAFE_DELETE(rec.dynamicA);
-   SAFE_DELETE(rec.dynamicB);
-   SAFE_DELETE(rec.dynamicC);
+   safe_delete(rec.dynamicA);
+   safe_delete(rec.dynamicB);
+   safe_delete(rec.dynamicC);
 
    // Play back - should get same thing.
    Journal::Play("test.jrn");

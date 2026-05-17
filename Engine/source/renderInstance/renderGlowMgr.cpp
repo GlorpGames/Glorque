@@ -62,7 +62,7 @@ RenderGlowMgr::GlowMaterialHook::GlowMaterialHook( BaseMatInstance *matInst )
 
 RenderGlowMgr::GlowMaterialHook::~GlowMaterialHook()
 {
-   SAFE_DELETE( mGlowMatInst );
+   safe_delete( mGlowMatInst );
 }
 
 void RenderGlowMgr::GlowMaterialHook::_overrideFeatures( ProcessedMaterial *mat,

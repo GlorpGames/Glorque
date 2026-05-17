@@ -81,10 +81,10 @@ Component::~Component()
    for (S32 i = 0; i < mFields.size(); ++i)
    {
       ComponentField &field = mFields[i];
-      SAFE_DELETE_ARRAY(field.mFieldDescription);
+      safe_delete_array(field.mFieldDescription);
    }
 
-   SAFE_DELETE_ARRAY(mDescription);
+   safe_delete_array(mDescription);
 }
 
 IMPLEMENT_CO_NETOBJECT_V1(Component);
@@ -141,7 +141,7 @@ bool Component::_setEnabled(void *object, const char *index, const char *data)
 bool Component::setDescription(void *object, const char *index, const char *data)
 {
    Component *bT = static_cast<Component *>(object);
-   SAFE_DELETE_ARRAY(bT->mDescription);
+   safe_delete_array(bT->mDescription);
    bT->mDescription = bT->getDescriptionText(data);
 
    // We return false since we don't want the console to mess with the data
@@ -571,7 +571,7 @@ const char * Component::getDescriptionText(const char *desc)
          newDesc[size] = 0;
       else
       {
-         SAFE_DELETE_ARRAY(newDesc);
+         safe_delete_array(newDesc);
       }
    }
 

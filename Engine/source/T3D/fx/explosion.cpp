@@ -935,7 +935,7 @@ Explosion::~Explosion()
       mExplosionThread   = NULL;
    }
    
-   SAFE_DELETE(mLight);
+   safe_delete(mLight);
    
    if (soundProfile_clone)
    { 
@@ -1415,7 +1415,7 @@ bool Explosion::explode()
          if( !pEmitter->registerObject() )
          {
             Con::warnf( ConsoleLogEntry::General, "Could not register emitter for particle of class: %s", mDataBlock->getName() );
-            SAFE_DELETE(pEmitter);
+            safe_delete(pEmitter);
          }
          mEmitterList[i] = pEmitter;
       }

@@ -87,7 +87,7 @@ GFXTextureManager::GFXTextureManager()
 GFXTextureManager::~GFXTextureManager()
 {
    if( mHashTable )
-      SAFE_DELETE_ARRAY( mHashTable );
+      safe_delete_array( mHashTable );
 
    mCubemapTable.clear();
 }
@@ -458,8 +458,8 @@ GFXTextureObject *GFXTextureManager::_createTexture(  GBitmap *bmp,
    if(profile->doStoreBitmap())
    {
       // NOTE: may store a downscaled copy!
-      SAFE_DELETE( ret->mBitmap );
-      SAFE_DELETE( ret->mDDS );
+      safe_delete( ret->mBitmap );
+      safe_delete( ret->mDDS );
 
       if( bmpDDS == NULL )
          ret->mBitmap = new GBitmap( *realBmp );
@@ -469,7 +469,7 @@ GFXTextureObject *GFXTextureManager::_createTexture(  GBitmap *bmp,
    else
    {
       // Delete the DDS if we made one
-      SAFE_DELETE( bmpDDS );
+      safe_delete( bmpDDS );
    }
 
    if ( !inObj )
@@ -488,9 +488,9 @@ GFXTextureObject *GFXTextureManager::_createTexture(  GBitmap *bmp,
 
    // Some final cleanup...
    if(realBmp != bmp)
-      SAFE_DELETE(realBmp);
+      safe_delete(realBmp);
    if (deleteBmp)
-      SAFE_DELETE(bmp);
+      safe_delete(bmp);
 
    // Return the new texture!
    return ret;
@@ -591,8 +591,8 @@ GFXTextureObject *GFXTextureManager::_createTexture(  DDSFile *dds,
    if(profile->doStoreBitmap())
    {
       // NOTE: may store a downscaled copy!
-      SAFE_DELETE( ret->mBitmap );
-      SAFE_DELETE( ret->mDDS );
+      safe_delete( ret->mBitmap );
+      safe_delete( ret->mDDS );
 
       ret->mDDS = new DDSFile( *dds );
    }

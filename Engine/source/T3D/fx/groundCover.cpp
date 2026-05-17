@@ -521,7 +521,7 @@ GroundCover::GroundCover()
 
 GroundCover::~GroundCover()
 {
-   SAFE_DELETE( mMatInst );
+   safe_delete( mMatInst );
 }
 
 IMPLEMENT_CO_NETOBJECT_V1(GroundCover);
@@ -823,7 +823,7 @@ void GroundCover::unpackUpdate( NetConnection *connection, BitStream *stream )
 
 void GroundCover::_initMaterial()
 {   
-   SAFE_DELETE( mMatInst );
+   safe_delete( mMatInst );
    
    if ( mMaterialName.isNotEmpty() )
       if ( !Sim::findObject( mMaterialName, mMaterial ) )

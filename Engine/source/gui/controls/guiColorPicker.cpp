@@ -257,7 +257,7 @@ void GuiColorPickerCtrl::drawBlendRangeBox(RectI &bounds, bool vertical, U8 numC
       PrimBuild::end();
    }
 
-   SAFE_DELETE_ARRAY(col);
+   safe_delete_array(col);
 }
 
 void GuiColorPickerCtrl::drawSelector(RectI &bounds, Point2I &selectorPos, SelectorMode mode)

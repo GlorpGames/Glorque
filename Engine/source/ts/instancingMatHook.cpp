@@ -37,7 +37,7 @@ InstancingMaterialHook::InstancingMaterialHook() :
 
 InstancingMaterialHook::~InstancingMaterialHook()
 {
-   SAFE_DELETE( mMatInst );
+   safe_delete( mMatInst );
 }
 
 BaseMatInstance* InstancingMaterialHook::getInstancingMat( BaseMatInstance *matInst )
@@ -61,7 +61,7 @@ BaseMatInstance* InstancingMaterialHook::getInstancingMat( BaseMatInstance *matI
       Material::sAllowTextureTargetAssignment = true;
 
       if ( !instMat->init( features, matInst->getVertexFormat() ) )
-         SAFE_DELETE( instMat );
+         safe_delete( instMat );
 
       // Turn back off named texture assignments
       Material::sAllowTextureTargetAssignment = false;

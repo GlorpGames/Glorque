@@ -708,7 +708,7 @@ Point3F Vehicle::getVelocity() const
 
 void Vehicle::_createPhysics()
 {
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    if (!PHYSICSMGR || !mDataBlock->enablePhysicsRep)
       return;
@@ -813,7 +813,7 @@ bool Vehicle::onAdd()
 
 void Vehicle::onRemove()
 {
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    U32 i=0;
    for( i=0; i<VehicleData::VC_NUM_DUST_EMITTERS; i++ )

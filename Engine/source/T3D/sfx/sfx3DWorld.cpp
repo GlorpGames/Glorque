@@ -47,7 +47,7 @@ MODULE_BEGIN( SFX3D )
    MODULE_SHUTDOWN
    {
       if( gSFX3DWorld )
-         SAFE_DELETE( gSFX3DWorld );
+         safe_delete( gSFX3DWorld );
    }
 
 MODULE_END;

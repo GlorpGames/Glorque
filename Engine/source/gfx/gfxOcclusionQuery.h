@@ -93,7 +93,7 @@ public:
 
     ~GFXOcclusionQueryHandle()
     {
-        SAFE_DELETE(mQuery);
+        safe_delete(mQuery);
     }
 
     bool getLastStatus( bool block, GFXOcclusionQuery::OcclusionQueryStatus *statusPtr = NULL, U32 *data = NULL );

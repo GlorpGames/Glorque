@@ -303,8 +303,8 @@ Precipitation::Precipitation()
 
 Precipitation::~Precipitation()
 {
-   SAFE_DELETE_ARRAY(mTexCoords);
-   SAFE_DELETE_ARRAY(mSplashCoords);
+   safe_delete_array(mTexCoords);
+   safe_delete_array(mSplashCoords);
 }
 
 void Precipitation::inspectPostApply()
@@ -885,8 +885,8 @@ void Precipitation::initRenderObjects()
 {
    AssertFatal(isClientObject(), "Precipitation is doing stuff on the server - BAD!");
 
-   SAFE_DELETE_ARRAY(mTexCoords);
-   SAFE_DELETE_ARRAY(mSplashCoords);
+   safe_delete_array(mTexCoords);
+   safe_delete_array(mSplashCoords);
 
    if (!mDataBlock)
       return;

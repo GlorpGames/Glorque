@@ -228,13 +228,13 @@ void RenderTexTargetBinManager::_teardownTargets()
 {
    mNamedTarget.release();
 
-   SAFE_DELETE_ARRAY(mTargetChain);
+   safe_delete_array(mTargetChain);
    if(mTargetChainTextures != NULL)
    {
       for( U32 i = 0; i < mTargetChainLength; i++ )
-         SAFE_DELETE_ARRAY(mTargetChainTextures[i]);
+         safe_delete_array(mTargetChainTextures[i]);
    }
-   SAFE_DELETE_ARRAY(mTargetChainTextures);
+   safe_delete_array(mTargetChainTextures);
 }
 
 GFXTextureTargetRef RenderTexTargetBinManager::_getTextureTarget(const U32 idx /* = 0 */)

@@ -110,7 +110,7 @@ protected:
             retTex->registerResourceWithDevice( GFX );
          }
 
-         SAFE_DELETE( retTex->mBitmap );
+         safe_delete( retTex->mBitmap );
          retTex->mBitmap = new GBitmap(width, height);
          return retTex;
       };

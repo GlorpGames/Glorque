@@ -76,8 +76,8 @@ void ProcessedFFMaterial::_construct()
 
 ProcessedFFMaterial::~ProcessedFFMaterial()
 {
-   SAFE_DELETE(mDefaultParameters);
-   SAFE_DELETE( mDefaultHandle );
+   safe_delete(mDefaultParameters);
+   safe_delete( mDefaultHandle );
 }
 
 void ProcessedFFMaterial::_createPasses( U32 stageNum, const FeatureSet &features )

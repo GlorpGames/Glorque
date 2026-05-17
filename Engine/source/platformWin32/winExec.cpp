@@ -66,7 +66,7 @@ public:
    {
       if( Con::isFunction( "onExecuteDone" ) )
          Con::executef( "onExecuteDone", Con::getIntArg( mOK ) );
-      SAFE_DELETE(mThread);
+      safe_delete(mThread);
    }
 };
 

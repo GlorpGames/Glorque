@@ -69,7 +69,7 @@ bool GuiMaterialCtrl::onWake()
 
 void GuiMaterialCtrl::onSleep()
 {
-   SAFE_DELETE( mMaterialInst );
+   safe_delete( mMaterialInst );
 
    Parent::onSleep();
 }
@@ -84,7 +84,7 @@ bool GuiMaterialCtrl::_setMaterial( void *object, const char *index, const char 
 
 bool GuiMaterialCtrl::setMaterial( const String &materialName )
 {
-   SAFE_DELETE( mMaterialInst );
+   safe_delete( mMaterialInst );
    mMaterialName = materialName;
 
    if ( mMaterialName.isNotEmpty() && isAwake() )

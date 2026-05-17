@@ -68,7 +68,7 @@ class SFXWavStream : public SFXFileStream,
       {
          SFXWavStream* stream = new SFXWavStream( *this );
          if( !stream->mStream )
-            SAFE_DELETE( stream );
+            safe_delete( stream );
          return stream;
       }
 

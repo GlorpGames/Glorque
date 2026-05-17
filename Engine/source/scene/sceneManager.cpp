@@ -93,8 +93,8 @@ MODULE_BEGIN( Scene )
    
    MODULE_SHUTDOWN
    {
-      SAFE_DELETE( gClientSceneGraph );
-      SAFE_DELETE( gServerSceneGraph );
+      safe_delete( gClientSceneGraph );
+      safe_delete( gServerSceneGraph );
    }
 
 MODULE_END;
@@ -141,7 +141,7 @@ SceneManager::SceneManager( bool isClient )
 
 SceneManager::~SceneManager()
 {   
-   SAFE_DELETE( mZoneManager );
+   safe_delete( mZoneManager );
 
    if( mLightManager )
       mLightManager->deactivate();   

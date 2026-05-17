@@ -104,8 +104,8 @@ LightShadowMap::LightShadowMap( LightInfo *light )
 LightShadowMap::~LightShadowMap()
 {
    mTarget = NULL;
-   SAFE_DELETE(mStaticRefreshTimer);
-   SAFE_DELETE(mDynamicRefreshTimer);
+   safe_delete(mStaticRefreshTimer);
+   safe_delete(mDynamicRefreshTimer);
 
    releaseTextures();
 
@@ -602,9 +602,9 @@ ShadowMapParams::ShadowMapParams( LightInfo *light )
 
 ShadowMapParams::~ShadowMapParams()
 {
-   SAFE_DELETE( mQuery );
-   SAFE_DELETE( mShadowMap );
-   SAFE_DELETE( mDynamicShadowMap );
+   safe_delete( mQuery );
+   safe_delete( mShadowMap );
+   safe_delete( mDynamicShadowMap );
 }
 
 void ShadowMapParams::_validate()
@@ -783,8 +783,8 @@ void ShadowMapParams::unpackUpdate( BitStream *stream )
       // If the shadow type changes delete the shadow
       // map so it can be reallocated on the next render.
       shadowType = newType;
-      SAFE_DELETE( mShadowMap );
-      SAFE_DELETE( mDynamicShadowMap );
+      safe_delete( mShadowMap );
+      safe_delete( mDynamicShadowMap );
    }
 
    mathRead( *stream, &attenuationRatio );

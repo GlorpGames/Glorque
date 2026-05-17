@@ -303,7 +303,7 @@ void TheoraTexture::_reset()
    // Delete the playback queue.
 
    if( mPlaybackQueue )
-      SAFE_DELETE( mPlaybackQueue );
+      safe_delete( mPlaybackQueue );
             
    // Kill the sound source.
 

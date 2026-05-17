@@ -97,7 +97,7 @@ MaterialManager::~MaterialManager()
    GFXDevice::getDeviceEventSignal().remove( this, &MaterialManager::_handleGFXEvent );  
    LightManager::smActivateSignal.remove( this, &MaterialManager::_onLMActivate );
 
-   SAFE_DELETE( mWarningInst );
+   safe_delete( mWarningInst );
 
 #ifndef TORQUE_SHIPPING
    DebugMaterialMap::Iterator itr = mMeshDebugMaterialInsts.begin();
@@ -439,7 +439,7 @@ bool MaterialManager::_handleGFXEvent( GFXDevice::GFXDeviceEventType event_ )
          break;
 
       case GFXDevice::deDestroy :
-         SAFE_DELETE( mWarningInst );
+         safe_delete( mWarningInst );
          break;
 
       case GFXDevice::deStartOfFrame:

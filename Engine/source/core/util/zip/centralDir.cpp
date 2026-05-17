@@ -71,7 +71,7 @@ CentralDir::CentralDir(FileHeader &fh) : FileHeader(fh)
 
 CentralDir::~CentralDir()
 {
-   SAFE_DELETE_ARRAY(mFileComment);
+   safe_delete_array(mFileComment);
 }
 
 //-----------------------------------------------------------------------------
@@ -108,7 +108,7 @@ bool CentralDir::read(Stream *stream)
    stream->read(fnLen, fn);
    fn[fnLen] = 0;
    mFilename = String(fn);
-   SAFE_DELETE_ARRAY(fn);
+   safe_delete_array(fn);
    
 
    // [tom, 10/28/2006] We currently only need the extra fields when we want to
@@ -122,7 +122,7 @@ bool CentralDir::read(Stream *stream)
    stream->read(fcLen, fn);
    fn[fcLen] = 0;
 
-   SAFE_DELETE_ARRAY(mFileComment);
+   safe_delete_array(mFileComment);
    mFileComment = fn;
 
    // Sanity checks to make life easier elsewhere
@@ -176,7 +176,7 @@ bool CentralDir::write(Stream *stream)
 
 void CentralDir::setFileComment(const char *comment)
 {
-   SAFE_DELETE_ARRAY(mFileComment);
+   safe_delete_array(mFileComment);
    dsize_t commentLen = dStrlen(comment) + 1;
    mFileComment = new char [commentLen];
    dStrcpy(mFileComment, comment, commentLen);
@@ -202,7 +202,7 @@ EndOfCentralDir::EndOfCentralDir()
 
 EndOfCentralDir::~EndOfCentralDir()
 {
-   SAFE_DELETE_ARRAY(mZipComment);
+   safe_delete_array(mZipComment);
 }
 
 //-----------------------------------------------------------------------------
@@ -226,7 +226,7 @@ bool EndOfCentralDir::read(Stream *stream)
    stream->read(mCommentSize, comment);
    comment[mCommentSize] = 0;
 
-   SAFE_DELETE_ARRAY(mZipComment);
+   safe_delete_array(mZipComment);
    mZipComment = comment;
 
    return true;
@@ -307,7 +307,7 @@ hell:
 
 void EndOfCentralDir::setZipComment(U16 commentSize, const char *zipComment)
 {
-   SAFE_DELETE_ARRAY(mZipComment);
+   safe_delete_array(mZipComment);
    mZipComment = new char [commentSize];
    dMemcpy((void *)mZipComment, zipComment, commentSize);
    mCommentSize = commentSize;

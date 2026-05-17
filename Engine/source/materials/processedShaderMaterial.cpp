@@ -166,10 +166,10 @@ ProcessedShaderMaterial::ProcessedShaderMaterial(Material &mat)
 
 ProcessedShaderMaterial::~ProcessedShaderMaterial()
 {
-   SAFE_DELETE(mInstancingState);
-   SAFE_DELETE(mDefaultParameters);
+   safe_delete(mInstancingState);
+   safe_delete(mDefaultParameters);
    for (U32 i = 0; i < mParameterHandles.size(); i++)
-      SAFE_DELETE(mParameterHandles[i]);
+      safe_delete(mParameterHandles[i]);
 }
 
 //
@@ -187,7 +187,7 @@ bool ProcessedShaderMaterial::init( const FeatureSet &features,
    mVertexFormat = vertexFormat;
    mFeatures.clear();
    mStateHint.clear();
-   SAFE_DELETE(mInstancingState);
+   safe_delete(mInstancingState);
 
    for( U32 i=0; i<mMaxStages; i++ )
    {
@@ -602,9 +602,9 @@ bool ProcessedShaderMaterial::_createPasses( MaterialFeatureData &stageFeatures,
 void ProcessedShaderMaterial::_initMaterialParameters()
 {   
    // Cleanup anything left first.
-   SAFE_DELETE( mDefaultParameters );
+   safe_delete( mDefaultParameters );
    for ( U32 i = 0; i < mParameterHandles.size(); i++ )
-      SAFE_DELETE( mParameterHandles[i] );
+      safe_delete( mParameterHandles[i] );
 
    // Gather the shaders as they all need to be 
    // passed to the ShaderMaterialParameterHandles.

@@ -74,7 +74,7 @@ AdvancedLightManager::~AdvancedLightManager()
    for (LightConstantMap::Iterator i = mConstantLookup.begin(); i != mConstantLookup.end(); i++)
    {
       if (i->value)
-         SAFE_DELETE(i->value);
+         safe_delete(i->value);
    }
    mConstantLookup.clear();
 }
@@ -171,7 +171,7 @@ void AdvancedLightManager::deactivate()
    for (LightConstantMap::Iterator i = mConstantLookup.begin(); i != mConstantLookup.end(); i++)
    {
       if (i->value)
-         SAFE_DELETE(i->value);
+         safe_delete(i->value);
    }
    mConstantLookup.clear();
 

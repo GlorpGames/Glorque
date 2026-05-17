@@ -135,7 +135,7 @@ public:
 
    ~OpenVRRenderModel()
    {
-      SAFE_DELETE(mMaterialInstance);
+      safe_delete(mMaterialInstance);
    }
 
    Box3F getWorldBox(MatrixF &mat)

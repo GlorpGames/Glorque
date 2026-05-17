@@ -121,7 +121,7 @@ void RigidBodyComponent::onComponentRemove()
       colComp->onCollisionChanged.remove(this, &RigidBodyComponent::updatePhysics);
    }
 
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 }
 
 void RigidBodyComponent::componentAddedToOwner(Component *comp)
@@ -153,7 +153,7 @@ void RigidBodyComponent::ownerTransformSet(MatrixF *mat)
 
 void RigidBodyComponent::updatePhysics(PhysicsCollision* collision)
 {
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    if (!PHYSICSMGR)
       return;

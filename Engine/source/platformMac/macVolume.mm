@@ -70,7 +70,7 @@ MacFileSystemChangeNotifier::~MacFileSystemChangeNotifier()
       FSEventStreamInvalidate( mEvents[ i ]->mStream );
       FSEventStreamRelease( mEvents[ i ]->mStream );
       
-      SAFE_DELETE( mEvents[ i ] );
+      safe_delete( mEvents[ i ] );
    }
 }
 
@@ -158,7 +158,7 @@ bool MacFileSystemChangeNotifier::internalRemoveNotification( const Torque::Path
          FSEventStreamInvalidate( mEvents[ i ]->mStream );
          FSEventStreamRelease( mEvents[ i ]->mStream );
          
-         SAFE_DELETE( mEvents[ i ] );
+         safe_delete( mEvents[ i ] );
          
          mEvents.erase( i );
          

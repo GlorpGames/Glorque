@@ -140,14 +140,14 @@ BasicLightManager::~BasicLightManager()
    for (LightConstantMap::Iterator i = mConstantLookup.begin(); i != mConstantLookup.end(); i++)
    {
       if (i->value)
-         SAFE_DELETE(i->value);
+         safe_delete(i->value);
    }
    mConstantLookup.clear();
 
    if (mTimer)
-      SAFE_DELETE( mTimer );
+      safe_delete( mTimer );
 
-   SAFE_DELETE( mTerrainSystem );
+   safe_delete( mTerrainSystem );
 }
 
 bool BasicLightManager::isCompatible() const
@@ -237,7 +237,7 @@ void BasicLightManager::deactivate()
    for (LightConstantMap::Iterator i = mConstantLookup.begin(); i != mConstantLookup.end(); i++)
    {
       if (i->value)
-         SAFE_DELETE(i->value);
+         safe_delete(i->value);
    }
    mConstantLookup.clear();
 

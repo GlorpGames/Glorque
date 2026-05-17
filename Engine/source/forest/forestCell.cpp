@@ -51,18 +51,18 @@ ForestCell::~ForestCell()
    mItems.clear();
 
    for ( U32 i=0; i < 4; i++ )
-      SAFE_DELETE( mSubCells[i] );
+      safe_delete( mSubCells[i] );
 
    freeBatches();
 
-   SAFE_DELETE( mPhysicsRep[0] );
-   SAFE_DELETE( mPhysicsRep[1] );
+   safe_delete( mPhysicsRep[0] );
+   safe_delete( mPhysicsRep[1] );
 }
 
 void ForestCell::freeBatches()
 {
    for ( U32 i=0; i < mBatches.size(); i++ )
-      SAFE_DELETE( mBatches[i] );
+      safe_delete( mBatches[i] );
 
    mBatches.clear();
 }
@@ -267,8 +267,8 @@ const ForestItem& ForestCell::insertItem( ForestItemKey key,
    mIsDirty = true;
 
    // PhysicsBody is now invalid and must be rebuilt later.
-   SAFE_DELETE( mPhysicsRep[0] );
-   SAFE_DELETE( mPhysicsRep[1] );
+   safe_delete( mPhysicsRep[0] );
+   safe_delete( mPhysicsRep[1] );
 
    // Destroy batches so we recreate it on
    // the next next render.
@@ -374,10 +374,10 @@ bool ForestCell::removeItem( ForestItemKey key, const Point3F &keyPos, bool dele
            mSubCells[2]->isEmpty() &&
            mSubCells[3]->isEmpty() )
       {
-         SAFE_DELETE( mSubCells[0] );
-         SAFE_DELETE( mSubCells[1] );
-         SAFE_DELETE( mSubCells[2] );
-         SAFE_DELETE( mSubCells[3] );
+         safe_delete( mSubCells[0] );
+         safe_delete( mSubCells[1] );
+         safe_delete( mSubCells[2] );
+         safe_delete( mSubCells[3] );
       }
    }
    else
@@ -395,8 +395,8 @@ bool ForestCell::removeItem( ForestItemKey key, const Point3F &keyPos, bool dele
    mIsDirty = true;
 
    // PhysicsBody is now invalid and must be rebuilt later.
-   SAFE_DELETE( mPhysicsRep[0] );
-   SAFE_DELETE( mPhysicsRep[1] );
+   safe_delete( mPhysicsRep[0] );
+   safe_delete( mPhysicsRep[1] );
 
    // Destroy batches so we recreate it on
    // the next next render.
@@ -486,7 +486,7 @@ void ForestCell::buildPhysicsRep( Forest *forest )
                                           polyList.mIndexList.size() / 3,
                                           MatrixF::Identity ) )
          {
-            SAFE_DELETE( colShape );
+            safe_delete( colShape );
          }
       }
    }
@@ -504,5 +504,5 @@ void ForestCell::clearPhysicsRep( Forest *forest )
 {
    bool isServer = forest->isServerObject();
 
-   SAFE_DELETE( mPhysicsRep[ isServer ] );
+   safe_delete( mPhysicsRep[ isServer ] );
 }

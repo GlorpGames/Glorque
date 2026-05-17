@@ -2100,7 +2100,7 @@ DefineEngineMethod( GameConnection, chaseCam, bool, (S32 size),,
 {
    if (size != sChaseQueueSize) 
    {
-      SAFE_DELETE_ARRAY(sChaseQueue);
+      safe_delete_array(sChaseQueue);
 
       sChaseQueueSize = size;
       sChaseQueueHead = sChaseQueueTail = 0;

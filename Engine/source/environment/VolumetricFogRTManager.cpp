@@ -52,7 +52,7 @@ MODULE_INIT
 MODULE_SHUTDOWN
 {
    gClientSceneGraph->removeObjectFromScene(gVolumetricFogRTManager);
-   SAFE_DELETE(gVolumetricFogRTManager);
+   safe_delete(gVolumetricFogRTManager);
 }
    
 MODULE_END;

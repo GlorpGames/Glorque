@@ -348,8 +348,8 @@ bool TSStatic::_createShape()
    mDecalDetails.clear();
    mDecalDetailsPtr = 0;
    mLOSDetails.clear();
-   SAFE_DELETE( mPhysicsRep );
-   SAFE_DELETE( mShapeInstance );
+   safe_delete( mPhysicsRep );
+   safe_delete( mShapeInstance );
    mAmbientThread = NULL;
    mShape = NULL;
 
@@ -451,7 +451,7 @@ void TSStatic::prepCollision()
 
 void TSStatic::_updatePhysics()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    if ( !PHYSICSMGR || mCollisionType == None )
       return;
@@ -478,7 +478,7 @@ void TSStatic::_updatePhysics()
 
 void TSStatic::onRemove()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    // Accumulation
    if ( isClientObject() && mShapeInstance )

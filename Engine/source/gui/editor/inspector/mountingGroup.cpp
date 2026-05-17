@@ -210,7 +210,7 @@ bool GuiInspectorMountingGroup::inspectGroup()
 			}
 			else
 			{
-				SAFE_DELETE( fieldGui );
+				safe_delete( fieldGui );
 			}
       }
    }

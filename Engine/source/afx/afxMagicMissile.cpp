@@ -986,7 +986,7 @@ void afxMagicMissile::init(bool on_server, bool on_client)
 
 afxMagicMissile::~afxMagicMissile()
 {
-   SAFE_DELETE(mLight);
+   safe_delete(mLight);
 
    delete mProjectileShape;
    mProjectileShape = NULL;

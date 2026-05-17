@@ -344,7 +344,7 @@ bool GuiInspectorComponentGroup::inspectGroup()
             }
             else
             {
-               SAFE_DELETE(fieldGui);
+               safe_delete(fieldGui);
             }
          }
       }
@@ -433,7 +433,7 @@ bool GuiInspectorComponentGroup::inspectGroup()
       }
       else
       {
-         SAFE_DELETE(fieldGui);
+         safe_delete(fieldGui);
       }
    }
 

@@ -76,9 +76,9 @@ SkyBox::~SkyBox()
    dFree_aligned(mMatrixSet);
 
    if( mMatInstance )
-      SAFE_DELETE( mMatInstance );
+      safe_delete( mMatInstance );
 
-   SAFE_DELETE( mFogBandMatInst );
+   safe_delete( mFogBandMatInst );
 
    if ( mFogBandMat )
    {
@@ -560,7 +560,7 @@ void SkyBox::_initRender()
 
    mFogBandVB.unlock();
 
-   SAFE_DELETE( mFogBandMatInst );
+   safe_delete( mFogBandMatInst );
    if ( mFogBandMat )
    {
       mFogBandMat->deleteObject();
@@ -590,7 +590,7 @@ void SkyBox::onStaticModified( const char *slotName, const char *newValue )
 void SkyBox::_initMaterial()
 {
    if ( mMatInstance )
-      SAFE_DELETE( mMatInstance );
+      safe_delete( mMatInstance );
 
    if ( mMaterial )
       mMatInstance = mMaterial->createMatInstance();

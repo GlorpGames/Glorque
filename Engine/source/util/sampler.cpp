@@ -286,7 +286,7 @@ static void stopSampling()
 {
    if( gSamplerRunning )
    {
-      SAFE_DELETE( gSamplerBackend );
+      safe_delete( gSamplerBackend );
       gSamplerRunning = false;
    }
 }
@@ -306,7 +306,7 @@ static void beginSampling( const char* location, const char* backend )
 
    if( !gSamplerBackend->init( location ) )
    {
-      SAFE_DELETE( gSamplerBackend );
+      safe_delete( gSamplerBackend );
    }
    else
    {
@@ -344,7 +344,7 @@ void Sampler::endFrame()
 void Sampler::destroy()
 {
    if( gSamplerBackend )
-      SAFE_DELETE( gSamplerBackend );
+      safe_delete( gSamplerBackend );
 }
 
 U32 Sampler::registerKey( const char* name )

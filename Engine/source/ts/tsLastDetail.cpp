@@ -96,7 +96,7 @@ TSLastDetail::TSLastDetail(   TSShape *shape,
 
 TSLastDetail::~TSLastDetail()
 {
-   SAFE_DELETE( mMatInstance );
+   safe_delete( mMatInstance );
    if ( mMaterial )
       mMaterial->deleteObject();
 
@@ -161,7 +161,7 @@ void TSLastDetail::update( bool forceUpdate )
    AssertFatal( GFXDevice::devicePresent(), "TSLastDetail::update() - Cannot update without a GFX device!" );
 
    // Clear the materialfirst.
-   SAFE_DELETE( mMatInstance );
+   safe_delete( mMatInstance );
    if ( mMaterial )
    {
       mMaterial->deleteObject();

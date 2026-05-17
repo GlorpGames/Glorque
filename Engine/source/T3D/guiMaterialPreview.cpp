@@ -65,8 +65,8 @@ GuiMaterialPreview::GuiMaterialPreview()
 
 GuiMaterialPreview::~GuiMaterialPreview()
 {
-   SAFE_DELETE(mModel);
-   SAFE_DELETE(mFakeSun);
+   safe_delete(mModel);
+   safe_delete(mFakeSun);
 }
 
 bool GuiMaterialPreview::onWake()
@@ -276,7 +276,7 @@ void GuiMaterialPreview::setObjectModel(const char* modelName)
 
 void GuiMaterialPreview::deleteModel()
 {
-   SAFE_DELETE(mModel);
+   safe_delete(mModel);
    runThread = 0;
 }
 

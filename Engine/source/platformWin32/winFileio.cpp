@@ -815,7 +815,7 @@ StringTableEntry Platform::getCurrentDirectory()
 #ifdef UNICODE
    char* utf8 = createUTF8string( buf );
    StringTableEntry result = StringTable->insert( utf8 );
-   SAFE_DELETE_ARRAY( utf8 );
+   safe_delete_array( utf8 );
    return result;
 #else
    return StringTable->insert( buf );
@@ -864,8 +864,8 @@ static void getExecutableInfo( StringTableEntry* path, StringTableEntry* exe )
          pathEntry = StringTable->insert( pathBuf );
          exeEntry = StringTable->insert( exeBuf );
 
-         SAFE_DELETE_ARRAY( pathBuf );
-         SAFE_DELETE_ARRAY( exeBuf );
+         safe_delete_array( pathBuf );
+         safe_delete_array( exeBuf );
       }
       else
       {

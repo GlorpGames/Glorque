@@ -126,7 +126,7 @@ SFXFileStream::~SFXFileStream()
    // but it their constructor fails, these won't even run.
    
    if( mStream && mOwnStream )
-      SAFE_DELETE( mStream );
+      safe_delete( mStream );
 }
 
 bool SFXFileStream::open( Stream *stream, bool ownStream )
@@ -157,7 +157,7 @@ void SFXFileStream::close()
 
    // We only close it if we own it.
    if ( mOwnStream )
-      SAFE_DELETE( mStream );
+      safe_delete( mStream );
 
    // Reset these to make it easier to detect bugs.
    mFormat.set( 0, 0, 0 );

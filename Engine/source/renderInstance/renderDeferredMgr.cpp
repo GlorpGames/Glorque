@@ -114,7 +114,7 @@ RenderDeferredMgr::~RenderDeferredMgr()
    mColorTarget.release();
    mMatInfoTarget.release();
    _unregisterFeatures();
-   SAFE_DELETE( mDeferredMatInstance );
+   safe_delete( mDeferredMatInstance );
 }
 
 void RenderDeferredMgr::_registerFeatures()
@@ -215,7 +215,7 @@ bool RenderDeferredMgr::_updateTargets()
 
 void RenderDeferredMgr::_createDeferredMaterial()
 {
-   SAFE_DELETE(mDeferredMatInstance);
+   safe_delete(mDeferredMatInstance);
 
    const GFXVertexFormat *vertexFormat = getGFXVertexFormat<GFXVertexPNTTB>();
 
@@ -228,7 +228,7 @@ void RenderDeferredMgr::_createDeferredMaterial()
 
 void RenderDeferredMgr::setDeferredMaterial( DeferredMatInstance *mat )
 {
-   SAFE_DELETE(mDeferredMatInstance);
+   safe_delete(mDeferredMatInstance);
    mDeferredMatInstance = mat;
 }
 
@@ -920,7 +920,7 @@ DeferredMatInstanceHook::DeferredMatInstanceHook( MatInstance *baseMatInst,
 
 DeferredMatInstanceHook::~DeferredMatInstanceHook()
 {
-   SAFE_DELETE(mHookedDeferredMatInst);
+   safe_delete(mHookedDeferredMatInst);
 }
 
 //------------------------------------------------------------------------------

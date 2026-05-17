@@ -67,7 +67,7 @@ SFXFMODBuffer* SFXFMODBuffer::create( const ThreadSafeRef< SFXStream >& stream, 
 {
    SFXFMODBuffer *buffer = new SFXFMODBuffer( stream, description );
    if( !buffer->mSound )
-      SAFE_DELETE( buffer );
+      safe_delete( buffer );
 
    return buffer;
 }
@@ -81,7 +81,7 @@ SFXFMODBuffer* SFXFMODBuffer::create( const String& filename, SFXDescription* de
       
    SFXFMODBuffer *buffer = new SFXFMODBuffer( filename, description );
    if( !buffer->mSound )
-      SAFE_DELETE( buffer );
+      safe_delete( buffer );
 
    return buffer;
 }

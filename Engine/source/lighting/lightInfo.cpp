@@ -129,7 +129,7 @@ void LightInfo::deleteExtended( const LightInfoExType& type )
    if ( type >= mExtended.size() )
       return;
 
-   SAFE_DELETE( mExtended[ type ] );
+   safe_delete( mExtended[ type ] );
 }
 
 void LightInfo::deleteAllLightInfoEx()

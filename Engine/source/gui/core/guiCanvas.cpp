@@ -154,8 +154,8 @@ GuiCanvas::GuiCanvas(): GuiControl(),
 
 GuiCanvas::~GuiCanvas()
 {
-   SAFE_DELETE(mPlatformWindow);
-   SAFE_DELETE_ARRAY( mFences );
+   safe_delete(mPlatformWindow);
+   safe_delete_array( mFences );
 }
 
 //------------------------------------------------------------------------------
@@ -1681,7 +1681,7 @@ void GuiCanvas::maintainSizing()
 void GuiCanvas::setupFences()
 {
    // Destroy old fences
-   SAFE_DELETE_ARRAY( mFences );
+   safe_delete_array( mFences );
 
    // Now create the new ones
    if( mNumFences > 0 )

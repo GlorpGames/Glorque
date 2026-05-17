@@ -217,7 +217,7 @@ TerrainBlock::~TerrainBlock()
    // Kill collision
    sTerrainConvexList.nukeList();
 
-   SAFE_DELETE(mLightMap);
+   safe_delete(mLightMap);
    mLightMapTex = NULL;
 
 #ifdef TORQUE_TOOLS
@@ -861,7 +861,7 @@ const char* TerrainBlock::getMaterialName( U32 index ) const
 
 void TerrainBlock::setLightMap( GBitmap *newLightMap )
 {
-   SAFE_DELETE( mLightMap );
+   safe_delete( mLightMap );
    mLightMap = newLightMap;
    mLightMapTex = NULL;
 }
@@ -1007,7 +1007,7 @@ String TerrainBlock::_getBaseTexCacheFileName() const
 
 void TerrainBlock::_rebuildQuadtree()
 {
-   SAFE_DELETE( mCell );
+   safe_delete( mCell );
 
    // Recursively build the cells.
    mCell = TerrCell::init( this );
@@ -1022,7 +1022,7 @@ void TerrainBlock::_updatePhysics()
    if ( !PHYSICSMGR )
       return;
 
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    PhysicsCollision *colShape;
 
@@ -1062,15 +1062,15 @@ void TerrainBlock::onRemove()
    removeFromScene();
    SceneZoneSpaceManager::getZoningChangedSignal().remove( this, &TerrainBlock::_onZoningChanged );
 
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    if ( isClientObject() )
    {
       mBaseTex = NULL;
       mLayerTex = NULL;
-      SAFE_DELETE( mBaseMaterial );
-      SAFE_DELETE( mDefaultMatInst );
-      SAFE_DELETE( mCell );
+      safe_delete( mBaseMaterial );
+      safe_delete( mDefaultMatInst );
+      safe_delete( mCell );
       mPrimBuffer = NULL;
       mBaseShader = NULL;
       GFXTextureManager::removeEventDelegate( this, &TerrainBlock::_onTextureEvent );
@@ -1261,7 +1261,7 @@ void TerrainBlock::unpackUpdate(NetConnection* con, BitStream *stream)
          mLightMapSize = lightMapSize;
          if ( isProperlyAdded() )
          {
-            SAFE_DELETE( mLightMap );
+            safe_delete( mLightMap );
             clearLightMap();
          }
       }

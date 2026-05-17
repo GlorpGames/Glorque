@@ -306,8 +306,8 @@ static void shutdownRoot()
       gRootGroup->deleteObject();
    gRootGroup = NULL;
 
-   SAFE_DELETE(gNameDictionary);
-   SAFE_DELETE(gIdDictionary);
+   safe_delete(gNameDictionary);
+   safe_delete(gIdDictionary);
 }
 
 //---------------------------------------------------------------------------

@@ -154,7 +154,7 @@ namespace OpenVRUtil
 
 bool OpenVRRenderModel::init(const vr::RenderModel_t & vrModel, StringTableEntry materialName)
 {
-   SAFE_DELETE(mMaterialInstance);
+   safe_delete(mMaterialInstance);
    mMaterialInstance = MATMGR->createMatInstance(materialName, getGFXVertexFormat< VertexType >());
    if (!mMaterialInstance)
       return false;
@@ -1531,12 +1531,12 @@ void OpenVRProvider::resetRenderModels()
 {
    for (U32 i = 0, sz = mLoadedModels.size(); i < sz; i++)
    {
-      SAFE_DELETE(mLoadedModels[i].model);
+      safe_delete(mLoadedModels[i].model);
       if (mLoadedModels[i].vrModel) mRenderModels->FreeRenderModel(mLoadedModels[i].vrModel);
    }
    for (U32 i = 0, sz = mLoadedTextures.size(); i < sz; i++)
    {
-      SAFE_DELETE(mLoadedTextures[i].targetTexture);
+      safe_delete(mLoadedTextures[i].targetTexture);
       if (mLoadedTextures[i].vrTexture) mRenderModels->FreeTexture(mLoadedTextures[i].vrTexture);
    }
    mLoadedModels.clear();

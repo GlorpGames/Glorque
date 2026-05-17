@@ -287,5 +287,5 @@ SFXBuffer::AsyncState::AsyncState( SFXInternal::SFXAsyncStream* stream )
 SFXBuffer::AsyncState::~AsyncState()
 {
    if( mQueue )
-      SAFE_DELETE( mQueue );
+      safe_delete( mQueue );
 }

@@ -629,7 +629,7 @@ Projectile::Projectile()
 
 Projectile::~Projectile()
 {
-   SAFE_DELETE(mLight);
+   safe_delete(mLight);
 
    delete mProjectileShape;
    mProjectileShape = NULL;

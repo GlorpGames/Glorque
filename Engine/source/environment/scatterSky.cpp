@@ -183,8 +183,8 @@ ScatterSky::ScatterSky()
 
 ScatterSky::~ScatterSky()
 {
-   SAFE_DELETE( mLight );
-   SAFE_DELETE( mMoonMatInst );
+   safe_delete( mLight );
+   safe_delete( mMoonMatInst );
 
    dFree_aligned(mMatrixSet);
 }
@@ -830,7 +830,7 @@ void ScatterSky::_initMoon()
       return;
 
    if ( mMoonMatInst )
-      SAFE_DELETE( mMoonMatInst );
+      safe_delete( mMoonMatInst );
 
    if ( mMoonMatName.isNotEmpty() )
       mMoonMatInst = MATMGR->createMatInstance( mMoonMatName, MATMGR->getDefaultFeatures(), getGFXVertexFormat<GFXVertexPCT>() );

@@ -51,8 +51,8 @@ public:
 
    ~MeshRenderSystemInterface()
    {
-      //SAFE_DELETE(mShape);
-      SAFE_DELETE(mShapeInstance);
+      //safe_delete(mShape);
+      safe_delete(mShapeInstance);
    }
 };
 

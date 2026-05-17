@@ -99,8 +99,8 @@ Sun::Sun()
 
 Sun::~Sun()
 {
-   SAFE_DELETE( mLight );
-   SAFE_DELETE( mCoronaMatInst );
+   safe_delete( mLight );
+   safe_delete( mCoronaMatInst );
    dFree_aligned(mMatrixSet);
 }
 
@@ -444,7 +444,7 @@ void Sun::_initCorona()
    if ( isServerObject() )
       return;
       
-   SAFE_DELETE( mCoronaMatInst );
+   safe_delete( mCoronaMatInst );
 
    if ( mCoronaMatName.isNotEmpty() )      
       mCoronaMatInst = MATMGR->createMatInstance( mCoronaMatName, MATMGR->getDefaultFeatures(), getGFXVertexFormat<GFXVertexPCT>() );         

@@ -41,7 +41,7 @@ GFXGLTextureManager::GFXGLTextureManager()
 //-----------------------------------------------------------------------------
 GFXGLTextureManager::~GFXGLTextureManager()
 {
-   SAFE_DELETE_ARRAY( mHashTable );
+   safe_delete_array( mHashTable );
 }
 
 //-----------------------------------------------------------------------------

@@ -43,7 +43,7 @@ ShadowMaterialHook::ShadowMaterialHook()
 ShadowMaterialHook::~ShadowMaterialHook()
 {
    for ( U32 i = 0; i < ShadowType_Count; i++ )
-      SAFE_DELETE( mShadowMat[i] );
+      safe_delete( mShadowMat[i] );
 }
 
 void ShadowMaterialHook::init( BaseMatInstance *inMat )
@@ -106,7 +106,7 @@ void ShadowMaterialHook::init( BaseMatInstance *inMat )
    newMat->addStateBlockDesc( forced );
    if( !newMat->init( features, inMat->getVertexFormat() ) )
    {
-      SAFE_DELETE( newMat );
+      safe_delete( newMat );
       newMat = MATMGR->createWarningMatInstance();
    }
    

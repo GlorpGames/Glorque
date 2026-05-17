@@ -101,7 +101,7 @@ void MatInstParameters::loadParameters(ProcessedMaterial* pmat)
 MatInstParameters::~MatInstParameters()
 {
    if (mOwnParameters)
-      SAFE_DELETE(mParameters);
+      safe_delete(mParameters);
 }
 
 const Vector<GFXShaderConstDesc>& MatInstParameters::getShaderConstDesc() const
@@ -263,10 +263,10 @@ void MatInstance::construct()
 //----------------------------------------------------------------------------
 MatInstance::~MatInstance()
 {
-   SAFE_DELETE(mProcessedMaterial);
-   SAFE_DELETE(mDefaultParameters);
+   safe_delete(mProcessedMaterial);
+   safe_delete(mDefaultParameters);
    for (U32 i = 0; i < mCurrentHandles.size(); i++)
-      SAFE_DELETE(mCurrentHandles[i]);   
+      safe_delete(mCurrentHandles[i]);
 
    MATMGR->_untrack(this);
 }
@@ -282,7 +282,7 @@ bool MatInstance::init( const FeatureSet &features,
    mFeatureList = features;
    mVertexFormat = vertexFormat;
 
-   SAFE_DELETE(mProcessedMaterial);   
+   safe_delete(mProcessedMaterial);
    mIsValid = processMaterial();         
 
    return mIsValid;
@@ -300,7 +300,7 @@ bool MatInstance::reInit()
       return mIsValid;
    }
 
-   SAFE_DELETE(mProcessedMaterial);
+   safe_delete(mProcessedMaterial);
    deleteAllHooks();
    mIsValid = processMaterial();
 
@@ -326,7 +326,7 @@ bool MatInstance::processMaterial()
    if ( !mMaterial || !mVertexFormat )   
       return false;   
 
-   SAFE_DELETE(mDefaultParameters);
+   safe_delete(mDefaultParameters);
 
    CustomMaterial *custMat = NULL;
 
@@ -373,7 +373,7 @@ bool MatInstance::processMaterial()
       if( !mProcessedMaterial->init(features, mVertexFormat, mFeaturesDelegate) )
       {
          Con::errorf( "Failed to initialize material '%s'", getMaterial()->getName() );
-         SAFE_DELETE( mProcessedMaterial );
+         safe_delete( mProcessedMaterial );
          return false;
       }
 

@@ -54,7 +54,7 @@ StringTableEntry assetPrivateField = StringTable->insert("AssetPrivate");
 //-----------------------------------------------------------------------------
 
 AssetBase::AssetBase() :
-mpOwningAssetManager(NULL),
+mpOwningAssetManager(nullptr),
 mAcquireReferenceCount(0),
 mAssetInitialized(false)
 {
@@ -69,7 +69,7 @@ AssetBase::~AssetBase()
    // If the asset manager does not own the asset then we own the
    // asset definition so delete it.
    if (!getOwned())
-      SAFE_DELETE(mpAssetDefinition);
+      safe_delete(mpAssetDefinition);
 }
 
 //-----------------------------------------------------------------------------

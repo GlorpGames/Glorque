@@ -1133,7 +1133,7 @@ bool WaterObject::initMaterial( S32 idx )
    if ( mSurfMatName[idx].isNotEmpty() )
    {      
       if ( mat )
-         SAFE_DELETE( mat );
+         safe_delete( mat );
 
       CustomMaterial *custMat;
       if ( Sim::findObject( mSurfMatName[idx], custMat ) && custMat->mShaderData )
@@ -1150,7 +1150,7 @@ bool WaterObject::initMaterial( S32 idx )
          return true;
       }
             
-      SAFE_DELETE( mat );      
+      safe_delete( mat );
    }
 
    return false;
@@ -1185,7 +1185,7 @@ void WaterObject::initTextures()
 void WaterObject::cleanupMaterials()
 {
    for (U32 i = 0; i < NumMatTypes; i++)
-      SAFE_DELETE(mMatInstances[i]);
+      safe_delete(mMatInstances[i]);
 }
 
 S32 WaterObject::getMaterialIndex( const Point3F &camPos )

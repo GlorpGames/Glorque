@@ -172,7 +172,7 @@ ForestSelectionTool::ForestSelectionTool()
 
 ForestSelectionTool::~ForestSelectionTool()
 {
-   SAFE_DELETE( mCurrAction );
+   safe_delete( mCurrAction );
 }
 
 void ForestSelectionTool::setParentEditor( ForestEditorCtrl *editor )

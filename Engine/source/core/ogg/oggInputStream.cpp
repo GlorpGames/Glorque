@@ -116,7 +116,7 @@ OggInputStream::~OggInputStream()
    ogg_sync_clear( &mOggSyncState );
    
    if( mStream )
-      SAFE_DELETE( mStream );
+      safe_delete( mStream );
 }
 
 OggDecoder* OggInputStream::getDecoder( const String& name ) const

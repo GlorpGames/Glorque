@@ -307,14 +307,14 @@ void OpenVRTrackedObject::onRemove()
 
    clearRenderData();
 
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    Parent::onRemove();
 }
 
 void OpenVRTrackedObject::_updatePhysics()
 {
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    if (!PHYSICSMGR)
       return;

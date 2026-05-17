@@ -198,7 +198,7 @@ Ribbon::Ribbon()
 Ribbon::~Ribbon()
 {
    //Make sure we cleanup
-   SAFE_DELETE(mRibbonMat);
+   safe_delete(mRibbonMat);
 }
 
 //--------------------------------------------------------------------------
@@ -274,7 +274,7 @@ void Ribbon::onRemove()
 {
 
    removeFromScene();
-   SAFE_DELETE(mRibbonMat);
+   safe_delete(mRibbonMat);
 
    Parent::onRemove();
 }

@@ -145,7 +145,7 @@ void Journal::Play(const char * file)
 
    if (_State == StopState)
    {
-      SAFE_DELETE(mFile);
+      safe_delete(mFile);
       mFile = new FileStream();
       if( ((FileStream*)mFile)->open(file, Torque::FS::File::Read) )
       {
@@ -164,7 +164,7 @@ void Journal::Stop()
 {
    AssertFatal(mFile, "Journal::Stop - no file stream open!");
 
-   SAFE_DELETE( mFile );
+   safe_delete( mFile );
    _State = StopState;
 }
 

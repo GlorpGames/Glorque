@@ -45,7 +45,7 @@ GFXShader::~GFXShader()
    Torque::FS::RemoveChangeNotification( mVertexFile, this, &GFXShader::_onFileChanged );
    Torque::FS::RemoveChangeNotification( mPixelFile, this, &GFXShader::_onFileChanged );
 
-   SAFE_DELETE(mInstancingFormat);
+   safe_delete(mInstancingFormat);
 }
 
 #ifndef TORQUE_OPENGL

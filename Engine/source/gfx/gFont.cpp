@@ -96,7 +96,7 @@ GFont* GFont::load( const Torque::Path& path )
    if(!ret->read(stream))
    {
       Con::errorf( "GFont::load - error reading '%s'", path.getFullPath().c_str() );
-      SAFE_DELETE(ret);
+      safe_delete(ret);
    }
    else
    {
@@ -105,7 +105,7 @@ GFont* GFont::load( const Torque::Path& path )
       if ( platFont == NULL )
       {
          Con::errorf( "GFont::load - error creating platform font for '%s'", path.getFullPath().c_str() );
-         SAFE_DELETE(ret);
+         safe_delete(ret);
       }
       else
          ret->setPlatformFont(platFont);
@@ -230,13 +230,13 @@ GFont::~GFont()
 
    for(i = 0;i < mCharInfoList.size();i++)
    {
-       SAFE_DELETE_ARRAY(mCharInfoList[i].bitmapData);
+       safe_delete_array(mCharInfoList[i].bitmapData);
    }
 
    for(i=0; i<mTextureSheets.size(); i++)
       mTextureSheets[i] = NULL;
 
-   SAFE_DELETE(mPlatformFont);
+   safe_delete(mPlatformFont);
    
    Mutex::destroyMutex(mMutex);
 }

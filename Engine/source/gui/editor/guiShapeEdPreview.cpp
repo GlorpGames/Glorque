@@ -108,8 +108,8 @@ GuiShapeEdPreview::GuiShapeEdPreview()
 
 GuiShapeEdPreview::~GuiShapeEdPreview()
 {
-   SAFE_DELETE( mModel );
-   SAFE_DELETE( mFakeSun );
+   safe_delete( mModel );
+   safe_delete( mFakeSun );
 }
 
 void GuiShapeEdPreview::initPersistFields()
@@ -343,7 +343,7 @@ void GuiShapeEdPreview::setCurrentDetail(S32 dl)
 
 bool GuiShapeEdPreview::setObjectModel(const char* modelName)
 {
-   SAFE_DELETE( mModel );
+   safe_delete( mModel );
    unmountAll();
    mThreads.clear();
    mActiveThread = -1;

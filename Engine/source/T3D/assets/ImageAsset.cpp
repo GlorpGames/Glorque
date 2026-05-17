@@ -123,7 +123,6 @@ void ImageAsset::copyTo(SimObject* object)
 
 void ImageAsset::loadImage()
 {
-   SAFE_DELETE(mImage);
 
    if (mImageFileName)
    {

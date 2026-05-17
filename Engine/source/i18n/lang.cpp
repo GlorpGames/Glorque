@@ -58,8 +58,8 @@ LangFile::~LangFile()
 	// is loaded, the language name will be blitzed.
 	// Programming after 36 hours without sleep != good.
 
-   SAFE_DELETE_ARRAY(mLangName);
-   SAFE_DELETE_ARRAY(mLangFile);
+   safe_delete_array(mLangName);
+   safe_delete_array(mLangFile);
 	freeTable();
 }
 
@@ -156,7 +156,7 @@ void LangFile::setString(U32 id, const UTF8 *str)
       }
    }
 
-   SAFE_DELETE_ARRAY(mStringTable[id]);
+   safe_delete_array(mStringTable[id]);
 
 	dsize_t newstrLen = dStrlen(str) + 1;
 	UTF8 *newstr = new UTF8 [newstrLen];

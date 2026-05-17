@@ -120,8 +120,8 @@ public:
    /// done with it first!
    virtual ~PlatformWindow() 
    {
-      SAFE_DELETE( mCursorController );
-      SAFE_DELETE( mWindowInputGenerator );
+      safe_delete( mCursorController );
+      safe_delete( mWindowInputGenerator );
    }
 
    /// Get the WindowController associated with this window

@@ -116,7 +116,7 @@ void RenderShapeExample::onRemove()
 
    // Remove our TSShapeInstance
    if ( mShapeInstance )
-      SAFE_DELETE( mShapeInstance );
+      safe_delete( mShapeInstance );
 
    Parent::onRemove();
 }
@@ -191,7 +191,7 @@ void RenderShapeExample::createShape()
 
    // Clean up our previous shape
    if ( mShapeInstance )
-      SAFE_DELETE( mShapeInstance );
+      safe_delete( mShapeInstance );
    mShape = NULL;
 
    // Attempt to get the resource from the ResourceManager

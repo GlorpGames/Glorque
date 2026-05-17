@@ -45,7 +45,7 @@ SFXDSBuffer* SFXDSBuffer::create(   IDirectSound8 *dsound,
 
 
    if( !buffer->_createBuffer( &buffer->mBuffer ) )
-      SAFE_DELETE( buffer );
+      safe_delete( buffer );
 
    return buffer;
 }

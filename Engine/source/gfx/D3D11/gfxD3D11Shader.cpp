@@ -292,8 +292,8 @@ GFXD3D11ShaderConstBuffer::~GFXD3D11ShaderConstBuffer()
       SAFE_RELEASE(mConstantBuffersV[i]);
    }
 
-   SAFE_DELETE(mVertexConstBuffer);
-   SAFE_DELETE(mPixelConstBuffer);
+   safe_delete(mVertexConstBuffer);
+   safe_delete(mPixelConstBuffer);
 
 
    if ( mShader )
@@ -693,8 +693,8 @@ void GFXD3D11ShaderConstBuffer::onShaderReload( GFXD3D11Shader *shader )
       SAFE_RELEASE(mConstantBuffersV[i]);
    }
 
-   SAFE_DELETE( mVertexConstBuffer );
-   SAFE_DELETE( mPixelConstBuffer );
+   safe_delete( mVertexConstBuffer );
+   safe_delete( mPixelConstBuffer );
         
    AssertFatal( mVertexConstBufferLayout == shader->mVertexConstBufferLayout, "GFXD3D11ShaderConstBuffer::onShaderReload is hosed!" );
    AssertFatal( mPixelConstBufferLayout == shader->mPixelConstBufferLayout, "GFXD3D11ShaderConstBuffer::onShaderReload is hosed!" );
@@ -732,8 +732,8 @@ GFXD3D11Shader::~GFXD3D11Shader()
       delete i->value;
 
    // delete const buffer layouts
-   SAFE_DELETE(mVertexConstBufferLayout);
-   SAFE_DELETE(mPixelConstBufferLayout);
+   safe_delete(mVertexConstBufferLayout);
+   safe_delete(mPixelConstBufferLayout);
 
    // release shaders
    SAFE_RELEASE(mVertShader);

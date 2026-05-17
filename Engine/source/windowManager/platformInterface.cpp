@@ -113,8 +113,8 @@ void Platform::minimizeWindow()
 void Platform::closeWindow()
 {
    // Shutdown all our stuff.
-   //SAFE_DELETE(gDevice); // <-- device is already cleaned up elsewhere by now...
-   SAFE_DELETE(gWindow);
+   //safe_delete(gDevice); // <-- device is already cleaned up elsewhere by now...
+   safe_delete(gWindow);
 }
 
 //------------------------------------------------------------------------------

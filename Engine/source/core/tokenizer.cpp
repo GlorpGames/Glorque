@@ -93,7 +93,7 @@ void Tokenizer::setBuffer(const char* buffer, U32 bufferSize)
 {
    if (mpBuffer)
    {
-      SAFE_DELETE_ARRAY(mpBuffer);
+      safe_delete_array(mpBuffer);
       mBufferSize = 0;
    }
 
@@ -109,7 +109,7 @@ void Tokenizer::setBuffer(const char* buffer, U32 bufferSize)
 void Tokenizer::setSingleTokens(const char* singleTokens)
 {
    if (mSingleTokens)
-      SAFE_DELETE(mSingleTokens);
+      safe_delete(mSingleTokens);
 
    if (singleTokens)
       mSingleTokens = dStrdup(singleTokens);
@@ -132,7 +132,7 @@ bool Tokenizer::clear()
 {
    // Delete our buffer
    if (mpBuffer)
-      SAFE_DELETE_ARRAY(mpBuffer);
+      safe_delete_array(mpBuffer);
 
    // Reset the buffer size
    mBufferSize = 0;

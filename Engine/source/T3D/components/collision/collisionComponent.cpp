@@ -155,10 +155,10 @@ CollisionComponent::~CollisionComponent()
    for (S32 i = 0; i < mFields.size(); ++i)
    {
       ComponentField &field = mFields[i];
-      SAFE_DELETE_ARRAY(field.mFieldDescription);
+      safe_delete_array(field.mFieldDescription);
    }
 
-   SAFE_DELETE_ARRAY(mDescription);
+   safe_delete_array(mDescription);
 }
 
 IMPLEMENT_CO_NETOBJECT_V1(CollisionComponent);
@@ -186,7 +186,7 @@ void CollisionComponent::onComponentAdd()
 
 void CollisionComponent::onComponentRemove()
 {
-   SAFE_DELETE(mPhysicsRep);
+   safe_delete(mPhysicsRep);
 
    Parent::onComponentRemove();
 }
@@ -209,7 +209,7 @@ void CollisionComponent::componentAddedToOwner(Component *comp)
    if (physicsInterface)
    {
       if (mPhysicsRep)
-         SAFE_DELETE(mPhysicsRep);
+         safe_delete(mPhysicsRep);
 
       prepCollision();
    }

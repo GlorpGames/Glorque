@@ -72,7 +72,7 @@ void SimPersistID::init()
 
 void SimPersistID::shutdown()
 {
-   SAFE_DELETE( smLookupTable );
+   safe_delete( smLookupTable );
 }
 
 //-----------------------------------------------------------------------------

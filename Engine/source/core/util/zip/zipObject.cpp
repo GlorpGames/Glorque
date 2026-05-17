@@ -112,7 +112,7 @@ bool ZipObject::openArchive(const char *filename, Zip::ZipArchive::AccessMode mo
    if(mZipArchive->openArchive(filename, mode))
       return true;
 
-   SAFE_DELETE(mZipArchive);
+   safe_delete(mZipArchive);
    return false;
 }
 
@@ -127,12 +127,12 @@ void ZipObject::closeArchive()
       if(so && so->getStream() != NULL)
          closeFile(so);
       
-      SAFE_DELETE_OBJECT(mStreamPool[i]);
+      safe_delete_object(mStreamPool[i]);
    }
    mStreamPool.clear();
 
    mZipArchive->closeArchive();
-   SAFE_DELETE(mZipArchive);
+   safe_delete(mZipArchive);
 }
 
 //-----------------------------------------------------------------------------

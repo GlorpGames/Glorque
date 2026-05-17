@@ -281,11 +281,11 @@ GFXGLDevice::~GFXGLDevice()
    }
       
    if( mCardProfiler )
-      SAFE_DELETE( mCardProfiler );
+      safe_delete( mCardProfiler );
 
-   SAFE_DELETE( gScreenShot );
+   safe_delete( gScreenShot );
 
-   SAFE_DELETE( mOpenglStateCache );
+   safe_delete( mOpenglStateCache );
 }
 
 void GFXGLDevice::zombify()

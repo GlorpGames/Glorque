@@ -60,8 +60,8 @@ LightManager::LightManager( const char *name, const char *id )
 LightManager::~LightManager() 
 {
    _getLightManagers().erase( mName );
-   SAFE_DELETE( mAvailableSLInterfaces );
-   SAFE_DELETE( mDefaultLight );
+   safe_delete( mAvailableSLInterfaces );
+   safe_delete( mDefaultLight );
 }
 
 LightManagerMap& LightManager::_getLightManagers()

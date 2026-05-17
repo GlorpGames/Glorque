@@ -50,8 +50,8 @@ void BtPlayer::_releaseController()
 
    mWorld->getDynamicsWorld()->removeCollisionObject( mGhostObject );
 
-   SAFE_DELETE( mGhostObject );
-   SAFE_DELETE( mColShape );
+   safe_delete( mGhostObject );
+   safe_delete( mColShape );
 }
 
 void BtPlayer::init( const char *type, 

@@ -648,8 +648,8 @@ void PhysicsShape::onRemove()
 {
    removeFromScene();
 
-   SAFE_DELETE( mPhysicsRep );
-   SAFE_DELETE( mShapeInst );
+   safe_delete( mPhysicsRep );
+   safe_delete( mShapeInst );
    mAmbientThread = NULL;
    mAmbientSeq = -1;
    mWorld = NULL;
@@ -696,8 +696,8 @@ bool PhysicsShape::onNewDataBlock( GameBaseData *dptr, bool reload )
 
 bool PhysicsShape::_createShape()
 {
-   SAFE_DELETE( mPhysicsRep );
-   SAFE_DELETE( mShapeInst );
+   safe_delete( mPhysicsRep );
+   safe_delete( mShapeInst );
    mAmbientThread = NULL;
    mWorld = NULL;
    mAmbientSeq = -1;

@@ -42,7 +42,7 @@ ReflectionMaterialHook::ReflectionMaterialHook() :
 
 ReflectionMaterialHook::~ReflectionMaterialHook()
 {
-   SAFE_DELETE(mReflectMat);
+   safe_delete(mReflectMat);
 }
 
 void ReflectionMaterialHook::init( BaseMatInstance *inMat )
@@ -70,7 +70,7 @@ void ReflectionMaterialHook::init( BaseMatInstance *inMat )
    newMat->addStateBlockDesc( refractState );
    if( !newMat->init( inMat->getFeatures(), inMat->getVertexFormat() ) )
    {
-      SAFE_DELETE( newMat );
+      safe_delete( newMat );
       newMat = MATMGR->createWarningMatInstance();
    }
    

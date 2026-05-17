@@ -112,7 +112,7 @@ Thread::~Thread()
    if( isAlive() )
       join();
 
-   SAFE_DELETE(mData);
+   safe_delete(mData);
 }
 
 //-----------------------------------------------------------------------------

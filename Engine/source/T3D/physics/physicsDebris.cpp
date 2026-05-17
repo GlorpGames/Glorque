@@ -686,7 +686,7 @@ void PhysicsDebris::_deleteFragments()
 
    mFragments.clear();
 
-   SAFE_DELETE( mShapeInstance );
+   safe_delete( mShapeInstance );
 }
 
 void PhysicsDebris::_findNodes( U32 colNode, Vector<U32> &nodeIds )

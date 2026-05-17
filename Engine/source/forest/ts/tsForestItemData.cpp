@@ -84,7 +84,7 @@ void TSForestItemData::onRemove()
    // Remove the resource change signal.
    ResourceManager::get().getChangedSignal().remove( this, &TSForestItemData::_onResourceChanged );
 
-   SAFE_DELETE( mShapeInstance );
+   safe_delete( mShapeInstance );
 
    Parent::onRemove();
 }
@@ -93,7 +93,7 @@ void TSForestItemData::inspectPostApply()
 {
    Parent::inspectPostApply();
 
-   SAFE_DELETE( mShapeInstance );
+   safe_delete( mShapeInstance );
    _loadShape();
 }
 
@@ -102,7 +102,7 @@ void TSForestItemData::_onResourceChanged( const Torque::Path &path )
    if ( path != Path( mShapeFile ) )
       return;
    
-   SAFE_DELETE( mShapeInstance );
+   safe_delete( mShapeInstance );
    _loadShape();   
 
    getReloadSignal().trigger();

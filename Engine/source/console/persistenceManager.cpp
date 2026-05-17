@@ -109,7 +109,7 @@ void PersistenceManager::deleteObject(ParsedObject* object)
       object->properties.clear();
 
       // Delete the parsed object
-      SAFE_DELETE(object);
+      safe_delete(object);
    }
 }
 
@@ -226,7 +226,7 @@ bool PersistenceManager::readFile(const char* fileName)
 void PersistenceManager::killObject()
 {
    // Don't save this object
-   SAFE_DELETE(mCurrentObject);
+   safe_delete(mCurrentObject);
 
    // If there is an object in the stack restore it
    if (mObjectStack.size() > 0)

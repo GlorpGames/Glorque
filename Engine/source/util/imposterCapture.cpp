@@ -90,8 +90,8 @@ ImposterCaptureMaterialHook::ImposterCaptureMaterialHook()
 
 ImposterCaptureMaterialHook::~ImposterCaptureMaterialHook()
 {
-   SAFE_DELETE( mDiffuseMatInst );
-   SAFE_DELETE( mNormalsMatInst );
+   safe_delete( mDiffuseMatInst );
+   safe_delete( mNormalsMatInst );
 }
 
 void ImposterCaptureMaterialHook::init( BaseMatInstance *inMat )
@@ -517,9 +517,9 @@ void ImposterCapture::end()
    
    mRenderTarget = NULL;
    mMeshRenderBin = NULL; // Deleted by mRenderPass
-   SAFE_DELETE( mState );
-   SAFE_DELETE( mRenderPass );
-   SAFE_DELETE( mBlackBmp );
-   SAFE_DELETE( mWhiteBmp );
+   safe_delete( mState );
+   safe_delete( mRenderPass );
+   safe_delete( mBlackBmp );
+   safe_delete( mWhiteBmp );
 }
 

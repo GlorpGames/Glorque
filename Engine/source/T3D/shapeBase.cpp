@@ -1058,7 +1058,7 @@ ShapeBase::ShapeBase()
 
 ShapeBase::~ShapeBase()
 {
-   SAFE_DELETE( mConvexList );
+   safe_delete( mConvexList );
 
    AssertFatal(mMount.link == 0,"ShapeBase::~ShapeBase: An object is still mounted");
    if( mShapeInstance && (mShapeInstance->getDebrisRefCount() == 0) )

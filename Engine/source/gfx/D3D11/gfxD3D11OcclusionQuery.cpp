@@ -48,7 +48,7 @@ GFXD3D11OcclusionQuery::~GFXD3D11OcclusionQuery()
    SAFE_RELEASE(mQuery);
 
 #ifdef TORQUE_GATHER_METRICS
-   SAFE_DELETE(mTimer);
+   safe_delete(mTimer);
 #endif
 }
 

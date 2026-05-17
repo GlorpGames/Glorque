@@ -62,7 +62,7 @@ SceneZoneSpaceManager::SceneZoneSpaceManager( SceneContainer* container )
 SceneZoneSpaceManager::~SceneZoneSpaceManager()
 {
    // Delete root zone.
-   SAFE_DELETE( mRootZone );
+   safe_delete( mRootZone );
 
    mNumTotalAllocatedZones = 0;
    mNumActiveZones = 0; 

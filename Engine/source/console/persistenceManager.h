@@ -139,7 +139,7 @@ public:
 
       ~DirtyObject()
       {
-         SAFE_DELETE( object );
+         safe_delete( object );
       }
    };
 

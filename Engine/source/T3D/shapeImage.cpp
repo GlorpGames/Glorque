@@ -2456,7 +2456,7 @@ void ShapeBase::resetImageSlot(U32 imageSlot)
 
    image.lightStart = 0;
    if ( image.lightInfo != NULL )
-      SAFE_DELETE( image.lightInfo );
+      safe_delete( image.lightInfo );
 
    updateMass();
 }

@@ -392,7 +392,7 @@ bool DecalRoad::onAdd()
 
 void DecalRoad::onRemove()
 {
-   SAFE_DELETE( mMatInst );
+   safe_delete( mMatInst );
 
    TerrainBlock::smUpdateSignal.remove( this, &DecalRoad::_onTerrainChanged );
 
@@ -1053,7 +1053,7 @@ bool DecalRoad::addNodeFromField( void *object, const char *index, const char *d
 
 void DecalRoad::_initMaterial()
 {
-   SAFE_DELETE( mMatInst );
+   safe_delete( mMatInst );
 
    if ( mMaterial )
       mMatInst = mMaterial->createMatInstance();

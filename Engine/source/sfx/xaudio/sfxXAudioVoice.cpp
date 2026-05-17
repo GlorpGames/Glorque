@@ -112,11 +112,11 @@ SFXXAudioVoice::~SFXXAudioVoice()
 {
    if ( mEmitter.pVolumeCurve )
    {
-      SAFE_DELETE_ARRAY( mEmitter.pVolumeCurve->pPoints );
-      SAFE_DELETE( mEmitter.pVolumeCurve );
+      safe_delete_array( mEmitter.pVolumeCurve->pPoints );
+      safe_delete( mEmitter.pVolumeCurve );
    }
 
-   SAFE_DELETE( mEmitter.pCone );
+   safe_delete( mEmitter.pCone );
 
    if ( mXAudioVoice )
       mXAudioVoice->DestroyVoice();
@@ -306,7 +306,7 @@ void SFXXAudioVoice::setMinMaxDistance( F32 min, F32 max )
       if( !mEmitter.pVolumeCurve )
          mEmitter.pVolumeCurve = new X3DAUDIO_DISTANCE_CURVE;
       else
-         SAFE_DELETE_ARRAY( mEmitter.pVolumeCurve->pPoints );
+         safe_delete_array( mEmitter.pVolumeCurve->pPoints );
 
       // We use 6 points for logarithmic volume curves and 2 for linear volume curves.
       if( linear )
@@ -420,7 +420,7 @@ void SFXXAudioVoice::setCone( F32 innerAngle, F32 outerAngle, F32 outerVolume )
    // set on the voice.
    if ( mIsEqual( innerAngle, 360 ) )
    {
-      SAFE_DELETE( mEmitter.pCone );
+      safe_delete( mEmitter.pCone );
       return;
    }
 

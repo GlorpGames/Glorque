@@ -82,7 +82,7 @@ MeshComponent::MeshComponent() : Component(), mShape(nullptr), mRenderMode(Indiv
 MeshComponent::~MeshComponent()
 {
    if (mInterfaceData)
-      SAFE_DELETE(mInterfaceData);
+      safe_delete(mInterfaceData);
 }
 
 IMPLEMENT_CO_NETOBJECT_V1(MeshComponent);

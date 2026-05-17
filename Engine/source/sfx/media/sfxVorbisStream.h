@@ -99,7 +99,7 @@ class SFXVorbisStream : public SFXFileStream,
       {
          SFXVorbisStream* stream = new SFXVorbisStream( *this );
          if( !stream->mVF )
-            SAFE_DELETE( stream );
+            safe_delete( stream );
          return stream;
       }
 

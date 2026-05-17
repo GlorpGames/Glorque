@@ -124,11 +124,11 @@ GuiObjectView::GuiObjectView()
 GuiObjectView::~GuiObjectView()
 {
    if( mModel )
-      SAFE_DELETE( mModel );
+      safe_delete( mModel );
    if( mMountedModel )
-      SAFE_DELETE( mMountedModel );
+      safe_delete( mMountedModel );
    if( mLight )
-      SAFE_DELETE( mLight );
+      safe_delete( mLight );
 }
 
 //------------------------------------------------------------------------------
@@ -343,7 +343,7 @@ void GuiObjectView::setObjectAnimation( const String& sequenceName )
 
 void GuiObjectView::setObjectModel( const String& modelName )
 {
-   SAFE_DELETE( mModel );
+   safe_delete( mModel );
    mRunThread = 0;
    mModelName = String::EmptyString;
    
@@ -416,7 +416,7 @@ void GuiObjectView::setMountNode( const String& name )
 
 void GuiObjectView::setMountedObject( const String& modelName )
 {
-   SAFE_DELETE( mMountedModel );
+   safe_delete( mMountedModel );
    mMountedModelName = String::EmptyString;
 
    // Load the model.

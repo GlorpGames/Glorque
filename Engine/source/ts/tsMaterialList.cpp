@@ -307,7 +307,7 @@ bool TSMaterialList::renameMaterial(U32 i, const String& newName)
 
    // Dump the old mat instance and remap the material.
    if( mMatInstList[ i ] )
-      SAFE_DELETE( mMatInstList[ i ] );
+      safe_delete( mMatInstList[ i ] );
    mapMaterial( i );
 
    return true;

@@ -80,7 +80,7 @@ void TerrainBlock::_onFlushMaterials()
    if ( mCell )
       mCell->deleteMaterials();
 
-   SAFE_DELETE( mBaseMaterial );
+   safe_delete( mBaseMaterial );
 }
 
 void TerrainBlock::_updateMaterials()

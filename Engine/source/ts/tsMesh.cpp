@@ -1190,10 +1190,10 @@ TSMesh::TSMesh() : mMeshType( StandardMeshType )
 
 TSMesh::~TSMesh()
 {
-   SAFE_DELETE( mOptTree );
-   SAFE_DELETE( mOpMeshInterface );
-   SAFE_DELETE_ARRAY( mOpTris );
-   SAFE_DELETE_ARRAY( mOpPoints );
+   safe_delete( mOptTree );
+   safe_delete( mOpMeshInterface );
+   safe_delete_array( mOpTris );
+   safe_delete_array( mOpPoints );
 
    mNumVerts = 0;
 }

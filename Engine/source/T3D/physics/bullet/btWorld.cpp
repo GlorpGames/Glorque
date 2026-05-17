@@ -98,11 +98,11 @@ void BtWorld::_destroy()
    // TODO: Release any remaining
    // orphaned rigid bodies here.
 
-   SAFE_DELETE( mDynamicsWorld );
-   SAFE_DELETE( mSolver );
-   SAFE_DELETE( mBroadphase );
-   SAFE_DELETE( mDispatcher );
-   SAFE_DELETE( mCollisionConfiguration );
+   safe_delete( mDynamicsWorld );
+   safe_delete( mSolver );
+   safe_delete( mBroadphase );
+   safe_delete( mDispatcher );
+   safe_delete( mCollisionConfiguration );
 }
 
 void BtWorld::tickPhysics( U32 elapsedMs )

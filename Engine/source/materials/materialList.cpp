@@ -407,7 +407,7 @@ void MaterialList::initMatInstances(   const FeatureSet &features,
 
          // Fall back to warning material.
 
-         SAFE_DELETE( matInst );
+         safe_delete( matInst );
          matInst = MATMGR->createMatInstance( "WarningMaterial" );
          matInst->init( MATMGR->getDefaultFeatures(), vertexFormat );
          mMatInstList[ i ] = matInst;

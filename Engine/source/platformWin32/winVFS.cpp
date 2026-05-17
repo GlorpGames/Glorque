@@ -80,8 +80,8 @@ Zip::ZipArchive *openEmbeddedVFSArchive()
          return gVFSState.mZip;
       }
 
-      SAFE_DELETE(gVFSState.mZip);
-      SAFE_DELETE(gVFSState.mZipStream);
+      safe_delete(gVFSState.mZip);
+      safe_delete(gVFSState.mZipStream);
    }
 
    FreeResource(gVFSState.mResData);
@@ -99,8 +99,8 @@ void closeEmbeddedVFSArchive()
 
    if(gVFSState.mRefCount < 1)
    {
-      SAFE_DELETE(gVFSState.mZip);
-      SAFE_DELETE(gVFSState.mZipStream);
+      safe_delete(gVFSState.mZip);
+      safe_delete(gVFSState.mZipStream);
       
       if(gVFSState.mResData)
       {

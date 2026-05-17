@@ -67,7 +67,7 @@ MODULE_BEGIN( DecalManager )
    MODULE_SHUTDOWN
    {
       gClientSceneGraph->removeObjectFromScene( gDecalManager );
-      SAFE_DELETE( gDecalManager );
+      safe_delete( gDecalManager );
    }
 
 MODULE_END;

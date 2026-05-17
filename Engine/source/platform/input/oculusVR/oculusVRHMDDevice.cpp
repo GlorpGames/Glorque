@@ -144,7 +144,7 @@ struct D3D11OculusTexture : public OculusTexture
    {
       for (int i = 0; i < TextureCount; ++i)
       {
-         SAFE_DELETE(TexRtv[i]);
+         safe_delete(TexRtv[i]);
       }
       if (TextureSet)
       {

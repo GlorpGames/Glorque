@@ -192,7 +192,7 @@ SFXDevice* SFXDSProvider::createDevice( const String& deviceName, bool useHardwa
                                  maxBuffers );
 
    if( !device->_init() )
-      SAFE_DELETE( device );
+      safe_delete( device );
 
    return device;
 }

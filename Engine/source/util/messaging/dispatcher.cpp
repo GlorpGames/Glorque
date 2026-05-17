@@ -92,8 +92,8 @@ typedef struct _DispatchData
       }
 
       Mutex::destroyMutex( mMutex );
-      //SAFE_DELETE(mMutex);
-      mMutex = NULL;
+      //safe_delete(mMutex);
+      mMutex = nullptr;
    }
 
    const char *makeAnonQueueName()

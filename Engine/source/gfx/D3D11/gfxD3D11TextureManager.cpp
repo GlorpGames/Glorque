@@ -41,7 +41,7 @@ GFXD3D11TextureManager::~GFXD3D11TextureManager()
 {
    // Destroy texture table now so just in case some texture objects
    // are still left, we don't crash on a pure virtual method call.
-   SAFE_DELETE_ARRAY( mHashTable );
+   safe_delete_array( mHashTable );
 }
 
 void GFXD3D11TextureManager::_innerCreateTexture( GFXD3D11TextureObject *retTex, 
@@ -324,7 +324,7 @@ bool GFXD3D11TextureManager::_loadTexture(GFXTextureObject *aTexture, GBitmap *p
 					
 					dev->getDeviceSwizzle32()->ToBuffer(copyBuffer, Bits, pDL->getWidth(i) * pDL->getHeight(i) * 4);
 					dev->getDeviceContext()->UpdateSubresource(texture->get2DTex(), subResource, NULL, copyBuffer, pDL->getWidth() * 4, pDL->getHeight() *4);
-               SAFE_DELETE_ARRAY(Bits);
+               safe_delete_array(Bits);
 					break;
 				}
 
@@ -348,7 +348,7 @@ bool GFXD3D11TextureManager::_loadTexture(GFXTextureObject *aTexture, GBitmap *p
 				}
 			}
 
-         SAFE_DELETE_ARRAY(copyBuffer);
+         safe_delete_array(copyBuffer);
 	    }
 	  
 	   else
@@ -370,7 +370,7 @@ bool GFXD3D11TextureManager::_loadTexture(GFXTextureObject *aTexture, GBitmap *p
 					bitmapConvertRGB_to_RGBX(&Bits, pDL->getWidth(i) * pDL->getHeight(i));					
 
 					dev->getDeviceSwizzle32()->ToBuffer(mapping.pData, Bits, pDL->getWidth(i) * pDL->getHeight(i) * 4);
-               SAFE_DELETE_ARRAY(Bits);
+               safe_delete_array(Bits);
 				}
 				break;
 
@@ -453,7 +453,7 @@ bool GFXD3D11TextureManager::_loadTexture(GFXTextureObject *inTex, void *raw)
    else
 		dev->getDeviceContext()->UpdateSubresource(texture->get3DTex(), 0, &box, raw, texture->getWidth() * bytesPerPix, texture->getHeight() * bytesPerPix);
 
-   SAFE_DELETE_ARRAY(Bits);
+   safe_delete_array(Bits);
 
    return true;
 }

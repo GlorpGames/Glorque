@@ -337,7 +337,7 @@ Item::Item()
 
 Item::~Item()
 {
-   SAFE_DELETE(mLight);
+   safe_delete(mLight);
 }
 
 
@@ -380,7 +380,7 @@ bool Item::onAdd()
 
 void Item::_updatePhysics()
 {
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    if ( !PHYSICSMGR )
       return;
@@ -436,7 +436,7 @@ void Item::onRemove()
    mWorkingQueryBox.minExtents.set(-1e9, -1e9, -1e9);
    mWorkingQueryBox.maxExtents.set(-1e9, -1e9, -1e9);
 
-   SAFE_DELETE( mPhysicsRep );
+   safe_delete( mPhysicsRep );
 
    if (!mSubclassItemHandlesScene)
    {

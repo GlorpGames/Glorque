@@ -73,7 +73,7 @@ ZipArchive::~ZipArchive()
 bool ZipArchive::readCentralDirectory()
 {
    mEntries.clear();
-   SAFE_DELETE(mRoot);
+   safe_delete(mRoot);
    mRoot = new ZipEntry;
    mRoot->mName = "";
    mRoot->mIsDirectory = true;
@@ -222,7 +222,7 @@ void ZipArchive::removeEntry(ZipEntry *ze)
    {
       if((*i)->getCentralDir() == &ze->mCD)
       {
-         SAFE_DELETE(*i);
+         safe_delete(*i);
          mTempFiles.erase(i);
 
          break;
@@ -620,7 +620,7 @@ bool ZipArchive::openArchive(Stream *stream, AccessMode mode /* = Read */)
    else
    {
       mEntries.clear();
-      SAFE_DELETE(mRoot);
+      safe_delete(mRoot);
       mRoot = new ZipEntry;
       mRoot->mName = "";
       mRoot->mIsDirectory = true;
@@ -638,7 +638,7 @@ void ZipArchive::closeArchive()
    // Free any remaining temporary files
    for(S32 i = 0;i < mTempFiles.size();++i)
    {
-      SAFE_DELETE(mTempFiles[i]);
+      safe_delete(mTempFiles[i]);
    }
    mTempFiles.clear();
 
@@ -654,7 +654,7 @@ void ZipArchive::closeArchive()
    mStream = NULL;
 
    SAFE_FREE(mFilename);
-   SAFE_DELETE(mRoot);
+   safe_delete(mRoot);
    mEntries.clear();
 }
 

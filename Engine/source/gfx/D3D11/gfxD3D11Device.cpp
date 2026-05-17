@@ -170,8 +170,8 @@ GFXD3D11Device::~GFXD3D11Device()
    SAFE_RELEASE(mD3DDeviceContext1);
    SAFE_RELEASE(mD3DDeviceContext);
 
-   SAFE_DELETE(mCardProfiler);
-   SAFE_DELETE(gScreenShot);
+   safe_delete(mCardProfiler);
+   safe_delete(gScreenShot);
 
 #ifdef TORQUE_DEBUG
    if (mDebugLayers)
@@ -273,7 +273,7 @@ void GFXD3D11Device::enumerateAdapters(Vector<GFXAdapter*> &adapterList)
       wcstombs(str, desc.Description,size);
       str[size]='\0';
       String Description=str;
-      SAFE_DELETE_ARRAY(str);
+      safe_delete_array(str);
 
       dStrncpy(toAdd->mName, Description.c_str(), GFXAdapter::MaxAdapterNameLen);
       dStrncat(toAdd->mName, " (D3D11)", GFXAdapter::MaxAdapterNameLen);

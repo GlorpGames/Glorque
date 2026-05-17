@@ -73,7 +73,7 @@ BtCollision::BtCollision()
 
 BtCollision::~BtCollision()
 {
-   SAFE_DELETE( mCompound );
+   safe_delete( mCompound );
 
    for ( U32 i=0; i < mShapes.size(); i++ )
       delete mShapes[i];

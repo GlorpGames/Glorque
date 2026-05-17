@@ -52,7 +52,7 @@ ForcedMaterialMeshMgr::ForcedMaterialMeshMgr(RenderInstType riType, F32 renderOr
 
 void ForcedMaterialMeshMgr::setOverrideMaterial(BaseMatInstance* overrideMaterial)
 {
-   SAFE_DELETE(mOverrideInstance);
+   safe_delete(mOverrideInstance);
    mOverrideInstance = overrideMaterial;
 }
 

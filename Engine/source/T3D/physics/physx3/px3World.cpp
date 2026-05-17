@@ -101,7 +101,7 @@ bool Px3World::restartSDK( bool destroyOnly, Px3World *clientWorld, Px3World *se
    SafeReleasePhysx(smPvdConnection);
    SafeReleasePhysx(smPvdTransport);
 
-   SAFE_DELETE(smErrorCallback);
+   safe_delete(smErrorCallback);
    SafeReleasePhysx(smFoundation);
 
    // If we're not supposed to restart... return.

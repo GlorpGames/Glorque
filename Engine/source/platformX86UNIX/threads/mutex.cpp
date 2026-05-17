@@ -51,7 +51,7 @@ Mutex::~Mutex()
 {
    AssertFatal(mData, "Mutex::destroyMutex: invalid mutex");
    pthread_mutex_destroy(&mData->mutex);
-   SAFE_DELETE(mData);
+   safe_delete(mData);
 }
 
 bool Mutex::lock(bool block)

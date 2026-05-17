@@ -62,7 +62,7 @@ FileHeader::~FileHeader()
 {
    for(S32 i = 0;i < mExtraFields.size();i++)
    {
-      SAFE_DELETE(mExtraFields[i]);
+      safe_delete(mExtraFields[i]);
    }
 }
 
@@ -134,7 +134,7 @@ bool FileHeader::read(Stream *stream)
    stream->read(fnLen, fn);
    fn[fnLen] = 0;
    mFilename = fn;
-   SAFE_DELETE_ARRAY(fn);
+   safe_delete_array(fn);
    
 
    return readExtraFields(stream, efLen);
